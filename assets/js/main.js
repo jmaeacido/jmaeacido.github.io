@@ -138,11 +138,7 @@ modal?.addEventListener("click", (event) => {
   }
 });
 
-function encodeFormData(formData) {
-  return new URLSearchParams(formData).toString();
-}
-
-contactForm?.addEventListener("submit", async (event) => {
+contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const fields = [...contactForm.querySelectorAll("input, textarea")];
@@ -160,33 +156,20 @@ contactForm?.addEventListener("submit", async (event) => {
 
   if (formNote) {
     formNote.textContent = isValid
-      ? "Sending your message..."
+      ? "Opening your email app..."
       : "Please complete the required fields before sending.";
   }
 
   if (!isValid) return;
 
-  const submitButton = contactForm.querySelector("button[type='submit']");
-  submitButton?.setAttribute("disabled", "true");
+  const formData = new FormData(contactForm);
+  const name = formData.get("name").trim();
+  const email = formData.get("email").trim();
+  const message = formData.get("message").trim();
+  const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
 
-  try {
-    const response = await fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encodeFormData(new FormData(contactForm))
-    });
-
-    if (!response.ok) {
-      throw new Error("Form submission failed");
-    }
-
-    window.location.href = "/thank-you/";
-  } catch (error) {
-    if (formNote) {
-      formNote.textContent = "Sorry, the message could not be sent. Please email me directly at 94jmaea94@gmail.com.";
-    }
-    submitButton?.removeAttribute("disabled");
-  }
+  window.location.href = `mailto:94jmaea94@gmail.com?subject=${subject}&body=${body}`;
 });
 
 contactForm?.querySelectorAll("input, textarea").forEach((field) => {

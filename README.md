@@ -2,7 +2,7 @@
 
 A modern static portfolio website for **John Mark Agustin E. Acido**, positioned as a Developer VA, Technical VA, and Web Developer.
 
-The site is built with plain HTML, CSS, and JavaScript. It has no custom backend and is ready for free hosting on GitHub Pages, Netlify, or any static hosting provider.
+The site is built with plain HTML, CSS, and JavaScript. It has no custom backend and is ready for free hosting on GitHub Pages or any static hosting provider.
 
 ## Features
 
@@ -14,7 +14,7 @@ The site is built with plain HTML, CSS, and JavaScript. It has no custom backend
 - Smooth scrolling
 - Subtle scroll reveal animations
 - Project category filtering
-- Netlify Forms contact form with visual validation and spam honeypot field
+- GitHub Pages-friendly contact form with visual validation and prefilled email draft
 - Confidentiality-friendly project placeholders
 - Resume download link pointing to `assets/resume/John_Mark_Acido_Resume.pdf`
 
@@ -55,7 +55,7 @@ Edit `assets/js/main.js` only if you want to change:
 
 - Theme toggle behavior
 - Project filtering
-- Contact form validation and Netlify Forms settings
+- Contact form validation and email draft behavior
 - Project details modal text
 - Scroll animations or active navigation
 
@@ -102,30 +102,11 @@ Your site will usually be available at:
 https://your-username.github.io/repository-name/
 ```
 
-## Deploy to Netlify
-
-1. Create a Netlify account.
-2. Click **Add new site > Deploy manually**.
-3. Drag and drop this project folder into Netlify.
-4. Netlify will publish the static site automatically.
-
-You can also connect the GitHub repository to Netlify for automatic deploys.
-
 ## Contact Form
 
-The contact form is connected with Netlify Forms. The form in `index.html` uses:
+The contact form is configured for GitHub Pages. Since GitHub Pages does not process backend form submissions, the form validates required fields and opens a prefilled email draft addressed to `94jmaea94@gmail.com`.
 
-- `name="contact"`
-- `method="POST"`
-- `netlify`
-- `data-netlify="true"`
-- `netlify-honeypot="bot-field"`
-- `data-netlify-honeypot="bot-field"`
-- A hidden `form-name` field
-- `action="/"`
-- JavaScript submission to Netlify with a redirect to the extensionless `/thank-you/` page after success
-
-After deploying to Netlify, open the live page source and confirm the `contact` form is present in the HTML. Then submit one test message and check **Project configuration > Forms** or the **Forms** tab in your Netlify dashboard. If the form still does not appear, trigger a fresh production deploy after committing the updated `index.html`.
+If you later want inbox-style form submissions without opening an email app, connect the form to a third-party service such as Formspree or another static-site form provider.
 
 ## Confidentiality Reminder
 

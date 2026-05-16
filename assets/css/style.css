@@ -780,24 +780,6 @@ h3 {
   background: rgba(4, 12, 21, 0.62);
 }
 
-.thank-you-card {
-  min-height: calc(100svh - 10rem);
-  display: grid;
-  align-content: center;
-  justify-items: start;
-  gap: 1rem;
-  max-width: 680px;
-}
-
-.thank-you-card h1 {
-  margin-bottom: 0;
-}
-
-.thank-you-card p:not(.eyebrow) {
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
 .modal-close {
   position: absolute;
   top: 0.65rem;
