@@ -156,7 +156,7 @@ contactForm?.addEventListener("submit", (event) => {
 
   if (formNote) {
     formNote.textContent = isValid
-      ? "Opening your email app..."
+      ? "Opening Gmail draft..."
       : "Please complete the required fields before sending.";
   }
 
@@ -168,8 +168,15 @@ contactForm?.addEventListener("submit", (event) => {
   const message = formData.get("message").trim();
   const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
   const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=94jmaea94@gmail.com&su=${subject}&body=${body}`;
 
-  window.location.href = `mailto:94jmaea94@gmail.com?subject=${subject}&body=${body}`;
+  const emailWindow = window.open(gmailUrl, "_blank", "noopener");
+
+  if (formNote) {
+    formNote.innerHTML = emailWindow
+      ? 'Gmail opened in a new tab. Please review and send your message there.'
+      : `Popup blocked. <a href="${gmailUrl}" target="_blank" rel="noopener">Open the Gmail draft manually</a> or email me at <a href="mailto:94jmaea94@gmail.com">94jmaea94@gmail.com</a>.`;
+  }
 });
 
 contactForm?.querySelectorAll("input, textarea").forEach((field) => {

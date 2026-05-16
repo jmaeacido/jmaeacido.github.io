@@ -14,7 +14,7 @@ The site is built with plain HTML, CSS, and JavaScript. It has no custom backend
 - Smooth scrolling
 - Subtle scroll reveal animations
 - Project category filtering
-- GitHub Pages-friendly contact form with visual validation and prefilled email draft
+- GitHub Pages-friendly contact form with visual validation and prefilled Gmail draft
 - Confidentiality-friendly project placeholders
 - Resume download link pointing to `assets/resume/John_Mark_Acido_Resume.pdf`
 
@@ -104,7 +104,7 @@ https://your-username.github.io/repository-name/
 
 ## Contact Form
 
-The contact form is configured for GitHub Pages. Since GitHub Pages does not process backend form submissions, the form validates required fields and opens a prefilled email draft addressed to `94jmaea94@gmail.com`.
+The contact form is configured for GitHub Pages. Since GitHub Pages does not process backend form submissions, the form validates required fields and opens a prefilled Gmail draft addressed to `94jmaea94@gmail.com`.
 
 If you later want inbox-style form submissions without opening an email app, connect the form to a third-party service such as Formspree or another static-site form provider.
 
