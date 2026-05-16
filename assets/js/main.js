@@ -180,7 +180,7 @@ contactForm?.addEventListener("submit", async (event) => {
       throw new Error("Form submission failed");
     }
 
-    window.location.href = "/thank-you.html";
+    window.location.href = "/thank-you/";
   } catch (error) {
     if (formNote) {
       formNote.textContent = "Sorry, the message could not be sent. Please email me directly at 94jmaea94@gmail.com.";
