@@ -80,6 +80,46 @@ const zynqScreenshots = [
   ["Settings", "assets/img/projects/zynq/27-settings.png"]
 ];
 
+const reportingScreenshots = [
+  ["KODUS Beneficiary Profile Report", "assets/img/projects/kodus/17-reports-beneficiary-profile.png"],
+  ["KODUS Sectoral Summary Report", "assets/img/projects/kodus/18-reports-sectoral-summary.png"],
+  ["KODUS PWD Summary", "assets/img/projects/kodus/19-reports-pwd-summary.png"],
+  ["KODUS PWD Sex Disaggregation", "assets/img/projects/kodus/20-reports-pwd-sex-disaggregated.png"],
+  ["ZYNQ Daily Sales Report", "assets/img/projects/zynq/12-daily-sales-report.png"],
+  ["ZYNQ VAT Sales Report", "assets/img/projects/zynq/13-vat-sales-report.png"],
+  ["ZYNQ Non-VAT Sales Report", "assets/img/projects/zynq/14-non-vat-sales-report.png"],
+  ["ZYNQ Discounts Report", "assets/img/projects/zynq/15-discounts-report.png"],
+  ["ZYNQ Voids Report", "assets/img/projects/zynq/16-voids-report.png"],
+  ["ZYNQ Refunds Report", "assets/img/projects/zynq/17-refunds-report.png"],
+  ["ZYNQ Audit Trail Report", "assets/img/projects/zynq/18-audit-trail-report.png"]
+];
+
+const securityScreenshots = [
+  ["KODUS Login Choice", "assets/img/projects/kodus/02-login-choice.png"],
+  ["KODUS Authenticator Setup", "assets/img/projects/kodus/33-authenticator-setup.png"],
+  ["KODUS Two-Factor Verification", "assets/img/projects/kodus/34-2fa-verification.png"],
+  ["KODUS Users Management", "assets/img/projects/kodus/26-administration-users-management.png"],
+  ["KODUS Password Security", "assets/img/projects/kodus/28-administration-password-security.png"],
+  ["KODUS Audit Logs", "assets/img/projects/kodus/29-administration-audit-logs.png"],
+  ["KODUS Maintenance Mode", "assets/img/projects/kodus/30-administration-maintenance-mode.png"],
+  ["ZYNQ Login", "assets/img/projects/zynq/01-login.png"],
+  ["ZYNQ Audit Trail Report", "assets/img/projects/zynq/18-audit-trail-report.png"],
+  ["ZYNQ Tenants", "assets/img/projects/zynq/19-tenants.png"],
+  ["ZYNQ Terminals", "assets/img/projects/zynq/21-terminals.png"],
+  ["ZYNQ BIR Settings", "assets/img/projects/zynq/22-bir-settings.png"]
+];
+
+const documentationScreenshots = [
+  ["KODUS MEBIS Name Matching Template", "assets/img/projects/kodus/23-tools-mebis-name-matching-template.png"],
+  ["KODUS MEB Import Template", "assets/img/projects/kodus/24-tools-meb-import-template.png"],
+  ["KODUS Cash Advance Requirements", "assets/img/projects/kodus/25-tools-cash-advance-requirements.png"],
+  ["ZYNQ Invoice Settings", "assets/img/projects/zynq/23-invoice-settings.png"],
+  ["ZYNQ Invoice Preview", "assets/img/projects/zynq/24-invoice-preview.png"],
+  ["ZYNQ Onboarding", "assets/img/projects/zynq/25-onboarding.png"],
+  ["ZYNQ Compliance Checklist", "assets/img/projects/zynq/26-compliance-checklist.png"],
+  ["ZYNQ Settings", "assets/img/projects/zynq/27-settings.png"]
+];
+
 const projectDetails = {
   "KODUS Web System": {
     intro:
@@ -100,6 +140,36 @@ const projectDetails = {
       "Prepared portfolio-safe screenshots with sensitive account, tenant, branch, sales, and audit data blurred or replaced."
     ],
     screenshots: zynqScreenshots
+  },
+  "Reporting & Data Automation Tools": {
+    intro:
+      "Sanitized report and data workflow captures from KODUS and ZYNQ, showing recurring summaries, validation views, sales reporting, and audit-ready report outputs.",
+    highlights: [
+      "Prepared and supported reporting workflows for beneficiary profiles, sectoral summaries, PWD summaries, sales reports, VAT and non-VAT reports, discounts, voids, refunds, and audit trails.",
+      "Helped make recurring reports easier to review by organizing data screens, summary views, templates, and validation-friendly outputs.",
+      "Kept portfolio examples confidentiality-safe by using sanitized captures and avoiding exposure of private beneficiary, tenant, branch, sales, and audit records."
+    ],
+    screenshots: reportingScreenshots
+  },
+  "Secure Login / 2FA / Audit Logging": {
+    intro:
+      "Sanitized security and administration captures from KODUS and ZYNQ, showing login flows, user management, password controls, audit logs, tenant controls, and system safeguards.",
+    highlights: [
+      "Supported authentication and access-related workflows across login screens, user management, password security, tenant settings, terminals, and administrative controls.",
+      "Worked with audit trail and activity review screens that help teams trace sensitive actions and keep operational changes accountable.",
+      "Prepared screenshots with private account, tenant, branch, terminal, and audit information removed or obscured before portfolio use."
+    ],
+    screenshots: securityScreenshots
+  },
+  "Technical Documentation & Workflow Automation": {
+    intro:
+      "Sanitized documentation and repeatable workflow captures from KODUS and ZYNQ, showing import templates, matching tools, requirements references, invoice setup, onboarding, and compliance checklists.",
+    highlights: [
+      "Created and maintained practical references for repeatable workflows such as imports, name matching, cash advance requirements, onboarding, invoice setup, and compliance checks.",
+      "Helped turn recurring support and QA tasks into clearer steps, templates, and review points for both technical and non-technical users.",
+      "Selected portfolio-safe examples that demonstrate documentation value while keeping operational details and client-sensitive information private."
+    ],
+    screenshots: documentationScreenshots
   }
 };
 
@@ -122,7 +192,7 @@ function renderProjectDetails(title) {
     .map(
       ([caption, src], index) => `
         <button class="screenshot-card" type="button" data-carousel-index="${index}">
-          <img src="${src}" alt="Sanitized KODUS screenshot: ${caption}" loading="lazy">
+          <img src="${src}" alt="Sanitized ${title} screenshot: ${caption}" loading="lazy">
           <span>${caption}</span>
         </button>
       `
@@ -132,7 +202,7 @@ function renderProjectDetails(title) {
   modalContent.innerHTML = `
     <p class="modal-lead">${details.intro}</p>
     <ul class="project-detail-list">${highlights}</ul>
-    <div class="screenshot-gallery" aria-label="Sanitized KODUS screenshots">
+    <div class="screenshot-gallery" aria-label="Sanitized ${title} screenshots">
       ${screenshots}
     </div>
     <div class="screenshot-carousel" data-carousel-viewer hidden aria-live="polite">
@@ -150,10 +220,10 @@ function renderProjectDetails(title) {
     </div>
   `;
 
-  setupScreenshotCarousel(details.screenshots);
+  setupScreenshotCarousel(details.screenshots, title);
 }
 
-function setupScreenshotCarousel(screenshots) {
+function setupScreenshotCarousel(screenshots, title) {
   if (!modalContent || !screenshots.length) return;
 
   let currentIndex = 0;
@@ -175,7 +245,7 @@ function setupScreenshotCarousel(screenshots) {
 
     if (image) {
       image.src = src;
-      image.alt = `Sanitized KODUS screenshot: ${label}`;
+      image.alt = `Sanitized ${title} screenshot: ${label}`;
     }
 
     if (caption) {
