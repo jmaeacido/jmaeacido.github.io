@@ -1,4 +1,4 @@
-# John Mark Acido Developer VA Portfolio
+# John Mark Agustin E. Acido Developer VA Portfolio
 
 A modern static portfolio website for **John Mark Agustin E. Acido**, positioned as a Developer VA, Technical VA, and Web Developer.
 
