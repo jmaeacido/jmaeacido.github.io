@@ -12,6 +12,207 @@ const contactForm = document.querySelector("[data-contact-form]");
 const formNote = document.querySelector("[data-form-note]");
 const modal = document.querySelector("[data-project-modal]");
 const modalTitle = document.querySelector("[data-modal-title]");
+const modalContent = document.querySelector("[data-modal-content]");
+let activeCarouselController = null;
+
+const kodusScreenshots = [
+  ["Year Selection", "assets/img/projects/kodus/01-select-year.png"],
+  ["Login Choice", "assets/img/projects/kodus/02-login-choice.png"],
+  ["Dashboard", "assets/img/projects/kodus/03-home-dashboard.png"],
+  ["Calendar", "assets/img/projects/kodus/04-calendar.png"],
+  ["MEB Master List", "assets/img/projects/kodus/05-tracking-meb-master-list.png"],
+  ["MEB Validation", "assets/img/projects/kodus/06-tracking-meb-validation.png"],
+  ["Incoming Documents", "assets/img/projects/kodus/07-tracking-incoming-documents.png"],
+  ["Outgoing Documents", "assets/img/projects/kodus/08-tracking-outgoing-documents.png"],
+  ["Payout Tracking", "assets/img/projects/kodus/09-tracking-payout.png"],
+  ["Fund Monitoring", "assets/img/projects/kodus/10-fund-monitoring.png"],
+  ["Baseline Targets", "assets/img/projects/kodus/11-implementation-baseline-targets.png"],
+  ["Program Activities", "assets/img/projects/kodus/12-implementation-program-activities.png"],
+  ["Project Location Maps", "assets/img/projects/kodus/13-implementation-project-location-maps.png"],
+  ["Project Location Records", "assets/img/projects/kodus/14-implementation-project-location-records.png"],
+  ["LAWA Summary", "assets/img/projects/kodus/15-implementation-lawa-summary.png"],
+  ["BINHI Summary", "assets/img/projects/kodus/16-implementation-binhi-summary.png"],
+  ["Beneficiary Profile Report", "assets/img/projects/kodus/17-reports-beneficiary-profile.png"],
+  ["Sectoral Summary Report", "assets/img/projects/kodus/18-reports-sectoral-summary.png"],
+  ["PWD Summary", "assets/img/projects/kodus/19-reports-pwd-summary.png"],
+  ["PWD Sex Disaggregation", "assets/img/projects/kodus/20-reports-pwd-sex-disaggregated.png"],
+  ["Crossmatching Tool", "assets/img/projects/kodus/21-tools-crossmatching.png"],
+  ["Deduplication Tool", "assets/img/projects/kodus/22-tools-deduplication.png"],
+  ["MEBIS Name Matching Template", "assets/img/projects/kodus/23-tools-mebis-name-matching-template.png"],
+  ["MEB Import Template", "assets/img/projects/kodus/24-tools-meb-import-template.png"],
+  ["Cash Advance Requirements", "assets/img/projects/kodus/25-tools-cash-advance-requirements.png"],
+  ["Users Management", "assets/img/projects/kodus/26-administration-users-management.png"],
+  ["Project Variables", "assets/img/projects/kodus/27-administration-project-variables.png"],
+  ["Password Security", "assets/img/projects/kodus/28-administration-password-security.png"],
+  ["Audit Logs", "assets/img/projects/kodus/29-administration-audit-logs.png"],
+  ["Maintenance Mode", "assets/img/projects/kodus/30-administration-maintenance-mode.png"],
+  ["Messenger Inbox", "assets/img/projects/kodus/31-messenger-inbox.png"],
+  ["Settings", "assets/img/projects/kodus/32-settings.png"]
+];
+
+const zynqScreenshots = [
+  ["Login", "assets/img/projects/zynq/01-login.png"],
+  ["Dashboard", "assets/img/projects/zynq/02-dashboard.png"],
+  ["POS Register", "assets/img/projects/zynq/03-pos-register.png"],
+  ["Sales", "assets/img/projects/zynq/04-sales.png"],
+  ["Cash Sessions", "assets/img/projects/zynq/05-cash-sessions.png"],
+  ["Offline Sync Status", "assets/img/projects/zynq/06-offline-sync-status.png"],
+  ["Offline Sync Conflicts", "assets/img/projects/zynq/07-offline-sync-conflicts.png"],
+  ["Products", "assets/img/projects/zynq/08-products.png"],
+  ["Categories", "assets/img/projects/zynq/09-categories.png"],
+  ["Inventory", "assets/img/projects/zynq/10-inventory.png"],
+  ["Stock Movements", "assets/img/projects/zynq/11-stock-movements.png"],
+  ["Daily Sales Report", "assets/img/projects/zynq/12-daily-sales-report.png"],
+  ["VAT Sales Report", "assets/img/projects/zynq/13-vat-sales-report.png"],
+  ["Non-VAT Sales Report", "assets/img/projects/zynq/14-non-vat-sales-report.png"],
+  ["Discounts Report", "assets/img/projects/zynq/15-discounts-report.png"],
+  ["Voids Report", "assets/img/projects/zynq/16-voids-report.png"],
+  ["Refunds Report", "assets/img/projects/zynq/17-refunds-report.png"],
+  ["Audit Trail Report", "assets/img/projects/zynq/18-audit-trail-report.png"],
+  ["Tenants", "assets/img/projects/zynq/19-tenants.png"],
+  ["Branches", "assets/img/projects/zynq/20-branches.png"],
+  ["Terminals", "assets/img/projects/zynq/21-terminals.png"],
+  ["BIR Settings", "assets/img/projects/zynq/22-bir-settings.png"],
+  ["Invoice Settings", "assets/img/projects/zynq/23-invoice-settings.png"],
+  ["Invoice Preview", "assets/img/projects/zynq/24-invoice-preview.png"],
+  ["Onboarding", "assets/img/projects/zynq/25-onboarding.png"],
+  ["Compliance Checklist", "assets/img/projects/zynq/26-compliance-checklist.png"],
+  ["Settings", "assets/img/projects/zynq/27-settings.png"]
+];
+
+const projectDetails = {
+  "KODUS Web System": {
+    intro:
+      "Sanitized feature captures from KODUS, showing the administrative workflows, tracking modules, reporting views, utilities, and system settings without exposing private records.",
+    highlights: [
+      "Maintained and supported PHP/MySQL workflows for beneficiary tracking, validation, reports, fund monitoring, and administration.",
+      "Improved operational usability across dashboard navigation, records review, reporting, security, and admin support screens.",
+      "Prepared portfolio-safe screenshots with sensitive account, beneficiary, document, and audit data blurred or replaced."
+    ],
+    screenshots: kodusScreenshots
+  },
+  "ZYNQ Web System": {
+    intro:
+      "Sanitized feature captures from ZYNQ, showing the BIR-ready POS foundation, sales operations, offline sync, inventory, reports, compliance setup, and administration workflows.",
+    highlights: [
+      "Supported POS and sales workflows, including checkout, sales records, cash sessions, and operational reporting.",
+      "Worked across inventory, stock movements, compliance setup, invoice previews, onboarding, and audit trail review screens.",
+      "Prepared portfolio-safe screenshots with sensitive account, tenant, branch, sales, and audit data blurred or replaced."
+    ],
+    screenshots: zynqScreenshots
+  }
+};
+
+function renderProjectDetails(title) {
+  if (!modalContent) return;
+
+  const details = projectDetails[title];
+
+  if (!details) {
+    activeCarouselController = null;
+    modalContent.innerHTML =
+      "<p>This project can be expanded with sanitized screenshots, measurable outcomes, and a short case study while keeping confidential information private.</p>";
+    return;
+  }
+
+  const highlights = details.highlights
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+  const screenshots = details.screenshots
+    .map(
+      ([caption, src], index) => `
+        <button class="screenshot-card" type="button" data-carousel-index="${index}">
+          <img src="${src}" alt="Sanitized KODUS screenshot: ${caption}" loading="lazy">
+          <span>${caption}</span>
+        </button>
+      `
+    )
+    .join("");
+
+  modalContent.innerHTML = `
+    <p class="modal-lead">${details.intro}</p>
+    <ul class="project-detail-list">${highlights}</ul>
+    <div class="screenshot-gallery" aria-label="Sanitized KODUS screenshots">
+      ${screenshots}
+    </div>
+    <div class="screenshot-carousel" data-carousel-viewer hidden aria-live="polite">
+      <div class="carousel-header">
+        <p data-carousel-caption></p>
+        <button class="carousel-close" type="button" data-carousel-close aria-label="Close screenshot viewer">Close</button>
+      </div>
+      <div class="carousel-stage">
+        <img data-carousel-image src="" alt="">
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" type="button" data-carousel-prev aria-label="Show previous screenshot">&lt;</button>
+        <button class="carousel-btn" type="button" data-carousel-next aria-label="Show next screenshot">&gt;</button>
+      </div>
+    </div>
+  `;
+
+  setupScreenshotCarousel(details.screenshots);
+}
+
+function setupScreenshotCarousel(screenshots) {
+  if (!modalContent || !screenshots.length) return;
+
+  let currentIndex = 0;
+  const image = modalContent.querySelector("[data-carousel-image]");
+  const caption = modalContent.querySelector("[data-carousel-caption]");
+  const cards = [...modalContent.querySelectorAll("[data-carousel-index]")];
+  const viewer = modalContent.querySelector("[data-carousel-viewer]");
+  const close = modalContent.querySelector("[data-carousel-close]");
+  const previous = modalContent.querySelector("[data-carousel-prev]");
+  const next = modalContent.querySelector("[data-carousel-next]");
+
+  function showScreenshot(index, shouldOpen = true) {
+    currentIndex = (index + screenshots.length) % screenshots.length;
+    const [label, src] = screenshots[currentIndex];
+
+    if (viewer && shouldOpen) {
+      viewer.hidden = false;
+    }
+
+    if (image) {
+      image.src = src;
+      image.alt = `Sanitized KODUS screenshot: ${label}`;
+    }
+
+    if (caption) {
+      caption.textContent = `${currentIndex + 1} / ${screenshots.length} - ${label}`;
+    }
+
+    cards.forEach((card, cardIndex) => {
+      const isActive = cardIndex === currentIndex;
+      card.classList.toggle("active", isActive);
+      card.setAttribute("aria-current", String(isActive));
+    });
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      showScreenshot(Number(card.dataset.carouselIndex));
+      modalContent.querySelector(".screenshot-carousel")?.scrollIntoView({ block: "start", behavior: "smooth" });
+    });
+  });
+
+  previous?.addEventListener("click", () => showScreenshot(currentIndex - 1));
+  next?.addEventListener("click", () => showScreenshot(currentIndex + 1));
+  close?.addEventListener("click", () => {
+    if (viewer) {
+      viewer.hidden = true;
+    }
+  });
+  activeCarouselController = {
+    viewer,
+    previous: () => showScreenshot(currentIndex - 1),
+    next: () => showScreenshot(currentIndex + 1)
+  };
+  showScreenshot(0, false);
+  if (viewer) {
+    viewer.hidden = true;
+  }
+}
 
 const savedTheme = localStorage.getItem("portfolio-theme");
 const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -112,6 +313,7 @@ document.querySelectorAll("[data-project-open]").forEach((button) => {
     if (!modal || !modalTitle) return;
 
     modalTitle.textContent = button.dataset.projectOpen;
+    renderProjectDetails(button.dataset.projectOpen);
 
     if (typeof modal.showModal === "function") {
       modal.showModal();
@@ -126,6 +328,8 @@ document.querySelector("[data-modal-close]")?.addEventListener("click", () => {
 });
 
 modal?.addEventListener("click", (event) => {
+  if (event.target !== modal) return;
+
   const dialogBounds = modal.getBoundingClientRect();
   const isOutside =
     event.clientX < dialogBounds.left ||
@@ -135,6 +339,20 @@ modal?.addEventListener("click", (event) => {
 
   if (isOutside) {
     modal.close();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!modal?.open || !activeCarouselController?.viewer || activeCarouselController.viewer.hidden) return;
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    activeCarouselController.previous();
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    activeCarouselController.next();
   }
 });
 
