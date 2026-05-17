@@ -16,7 +16,7 @@ The site is built with plain HTML, CSS, and JavaScript. It has no custom backend
 - Project category filtering
 - GitHub Pages-friendly contact form with visual validation and prefilled Gmail draft
 - Confidentiality-friendly project placeholders
-- Resume download link pointing to `assets/resume/John_Mark_Acido_Resume.pdf`
+- Resume download link pointing to `assets/resume/John_Mark_Agustin_E_Acido_Resume.pdf`
 
 ## File Structure
 
@@ -64,7 +64,7 @@ Edit `assets/js/main.js` only if you want to change:
 Place your resume PDF here:
 
 ```text
-assets/resume/John_Mark_Acido_Resume.pdf
+assets/resume/John_Mark_Agustin_E_Acido_Resume.pdf
 ```
 
 The hero button already points to that file. If you rename the PDF, update the link in `index.html`.
