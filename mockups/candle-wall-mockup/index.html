@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Candle Wall | Digital Prayer Service</title>
+  <meta name="description" content="A premium front-end concept for an immersive digital prayer candle wall.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient-bg" aria-hidden="true">
+    <span class="aura aura-one"></span>
+    <span class="aura aura-two"></span>
+    <span class="aura aura-three"></span>
+  </div>
+
+  <header class="site-header" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Return to top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Sacred Light</span>
+    </a>
+    <nav class="nav-links" aria-label="Page sections">
+      <a href="#wall">Candle Wall</a>
+      <a href="#meaning">Meanings</a>
+      <a href="#reflection">Reflection</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A quiet digital sanctuary</p>
+        <h1 id="hero-title">Light a candle for someone you love.</h1>
+        <p class="hero-subtitle">
+          Offer a prayer, remember a life, or hold a hope in the soft glow of a shared candle wall where every flame carries a human story.
+        </p>
+        <div class="hero-actions" aria-label="Primary actions">
+          <button class="button button-primary" type="button" data-open-modal>Light a Candle</button>
+          <a class="button button-secondary" href="#wall">Enter the Sanctuary</a>
+        </div>
+      </div>
+      <div class="hero-altar" aria-hidden="true">
+        <div class="altar-glow"></div>
+        <div class="altar-candle altar-candle-one"></div>
+        <div class="altar-candle altar-candle-two"></div>
+        <div class="altar-candle altar-candle-three"></div>
+        <div class="altar-candle altar-candle-four"></div>
+      </div>
+    </section>
+
+    <section class="wall-section" id="wall" aria-labelledby="wall-title">
+      <div class="section-intro">
+        <p class="eyebrow">Live Candle Wall</p>
+        <h2 id="wall-title">A living altar of prayers, remembrance, and hope.</h2>
+        <p>
+          Each candle holds a name and intention. The candle near the center is yours, shining a little brighter in the company of many quiet prayers.
+        </p>
+      </div>
+
+      <div class="sanctuary-frame">
+        <div class="wall-atmosphere" aria-hidden="true">
+          <span class="light-ray ray-one"></span>
+          <span class="light-ray ray-two"></span>
+          <span class="light-ray ray-three"></span>
+        </div>
+        <div class="particle-field" id="particleField" aria-hidden="true"></div>
+        <div class="candle-wall" id="candleWall" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="meaning-section" id="meaning" aria-labelledby="meaning-title">
+      <div class="section-intro">
+        <p class="eyebrow">Candle Meanings</p>
+        <h2 id="meaning-title">Choose the color that carries the prayer.</h2>
+      </div>
+      <div class="meaning-grid">
+        <article class="meaning-card">
+          <span class="meaning-swatch swatch-hope"></span>
+          <h3>Gold / Amber</h3>
+          <p>Hope, gratitude, and the quiet courage to keep believing.</p>
+        </article>
+        <article class="meaning-card">
+          <span class="meaning-swatch swatch-healing"></span>
+          <h3>Blue</h3>
+          <p>Healing, mercy, restoration, and tenderness through pain.</p>
+        </article>
+        <article class="meaning-card">
+          <span class="meaning-swatch swatch-guidance"></span>
+          <h3>Purple</h3>
+          <p>Guidance, discernment, and light for an uncertain path.</p>
+        </article>
+        <article class="meaning-card">
+          <span class="meaning-swatch swatch-peace"></span>
+          <h3>White</h3>
+          <p>Peace, remembrance, blessing, and the nearness of love.</p>
+        </article>
+        <article class="meaning-card">
+          <span class="meaning-swatch swatch-strength"></span>
+          <h3>Red</h3>
+          <p>Strength, devotion, love, and courage for someone dear.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="reflection-section" id="reflection" aria-labelledby="reflection-title">
+      <div class="reflection-inner">
+        <p class="eyebrow">Stillness</p>
+        <h2 id="reflection-title">May every flame become a small promise: that no one is forgotten, and no prayer is alone.</h2>
+        <button class="button button-primary" type="button" data-open-modal>Light Another Candle</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-shell" id="candleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <form class="candle-form" id="candleForm">
+      <button class="modal-close" type="button" aria-label="Close candle form" data-close-modal></button>
+      <p class="eyebrow">Light a Candle</p>
+      <h2 id="modalTitle">Place your prayer on the wall.</h2>
+
+      <label for="nameInput">Name</label>
+      <input id="nameInput" name="name" type="text" autocomplete="name" placeholder="For someone you love" required>
+
+      <label for="intentionInput">Prayer intention</label>
+      <textarea id="intentionInput" name="intention" rows="4" placeholder="Write a prayer, remembrance, or hope..." required></textarea>
+
+      <fieldset>
+        <legend>Candle color</legend>
+        <div class="theme-options">
+          <label>
+            <input type="radio" name="theme" value="hope" checked>
+            <span><i class="theme-dot theme-hope"></i>Hope</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="healing">
+            <span><i class="theme-dot theme-healing"></i>Healing</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="guidance">
+            <span><i class="theme-dot theme-guidance"></i>Guidance</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="peace">
+            <span><i class="theme-dot theme-peace"></i>Peace</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="strength">
+            <span><i class="theme-dot theme-strength"></i>Strength</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button class="button button-primary form-submit" type="submit">Add My Candle</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

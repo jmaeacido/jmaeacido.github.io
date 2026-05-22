@@ -607,6 +607,55 @@ h3 {
   padding: 1.2rem;
 }
 
+.mockup-showcase {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.68fr) minmax(0, 1.32fr);
+  gap: clamp(1rem, 3vw, 1.6rem);
+  align-items: stretch;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.mockup-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(0.25rem, 1vw, 0.65rem);
+}
+
+.mockup-copy p {
+  color: var(--muted);
+}
+
+.mockup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.mockup-preview {
+  min-height: 440px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #070b16;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #ffffff 8%, transparent);
+}
+
+.mockup-preview iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  display: block;
+  border: 0;
+}
+
 .confidential-note {
   font-size: 0.78rem;
   margin-bottom: 0.8rem;
@@ -1057,8 +1106,14 @@ h3 {
 
   .hero-grid,
   .split-section,
+  .mockup-showcase,
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mockup-preview,
+  .mockup-preview iframe {
+    min-height: 520px;
   }
 
   .services-grid,
@@ -1096,6 +1151,20 @@ h3 {
 
   .project-image {
     min-height: 170px;
+  }
+
+  .mockup-showcase {
+    padding: 0.75rem;
+  }
+
+  .mockup-actions,
+  .mockup-actions .btn {
+    width: 100%;
+  }
+
+  .mockup-preview,
+  .mockup-preview iframe {
+    min-height: 460px;
   }
 
   .footer-grid,
