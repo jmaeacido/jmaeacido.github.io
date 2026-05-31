@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAILA static marketplace mockup with sample service requests, provider matching, offers, trust workflow, and validation metrics.">
+  <meta name="theme-color" content="#0b4552">
+  <title>KAILA Marketplace Sample App</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="KAILA workspace navigation">
+      <a class="brand" href="#requests" aria-label="KAILA home">
+        <span class="brand-mark"><img src="assets/kaila-icon.svg" alt=""></span>
+        <span>
+          <strong>KAILA</strong>
+          <small>Local services desk</small>
+        </span>
+      </a>
+
+      <nav class="nav-list" aria-label="Workspace sections">
+        <a href="#requests" data-view-link="requests" class="active">Requests</a>
+        <a href="#providers" data-view-link="providers">Providers</a>
+        <a href="#validation" data-view-link="validation">Validation</a>
+        <a href="#operations" data-view-link="operations">Operations</a>
+        <a href="#brand" data-view-link="brand">Brand</a>
+      </nav>
+
+      <div class="pilot-card">
+        <span class="status-dot"></span>
+        <strong>Gingoog City pilot</strong>
+        <p>Manual matching is active across selected barangays before full MVP development.</p>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Kung wala kay kaila, naa mi.</p>
+          <h1>Trusted local help for Gingoog City.</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" type="button" data-density-toggle aria-label="Toggle compact mode" title="Toggle compact mode">C</button>
+          <a class="ghost-link" href="../../" aria-label="Back to portfolio">Portfolio</a>
+        </div>
+      </header>
+
+      <section class="insight-strip" aria-label="Pilot metrics">
+        <article>
+          <span>Active providers</span>
+          <strong>52</strong>
+          <small>Target: 50</small>
+        </article>
+        <article>
+          <span>Posted requests</span>
+          <strong>34</strong>
+          <small>30-day Gingoog pilot</small>
+        </article>
+        <article>
+          <span>Avg. response</span>
+          <strong>18m</strong>
+          <small>Top categories</small>
+        </article>
+        <article>
+          <span>Strong matches</span>
+          <strong>19</strong>
+          <small>Go/no-go signal</small>
+        </article>
+      </section>
+
+      <section class="view active" id="requests" data-view="requests">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Client request board</p>
+            <h2>Sample service requests and provider offers</h2>
+          </div>
+          <div class="segmented" role="group" aria-label="Filter requests">
+            <button class="active" type="button" data-filter="all">All</button>
+            <button type="button" data-filter="urgent">Urgent</button>
+            <button type="button" data-filter="matched">Matched</button>
+          </div>
+        </div>
+
+        <div class="request-layout">
+          <div class="request-list" data-request-list></div>
+
+          <aside class="detail-panel" data-request-detail aria-live="polite">
+            <p class="empty-note">Select a request to compare offers and trust signals.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="providers" data-view="providers">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Supply-first strategy</p>
+            <h2>Provider directory samples</h2>
+          </div>
+          <label class="search-box">
+            <span>Search</span>
+            <input type="search" data-provider-search placeholder="Category, name, area">
+          </label>
+        </div>
+        <div class="provider-grid" data-provider-grid></div>
+      </section>
+
+      <section class="view" id="validation" data-view="validation">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Market validation</p>
+            <h2>Go/no-go scorecard</h2>
+          </div>
+        </div>
+        <div class="scorecard">
+          <article>
+            <h3>Proceed to MVP</h3>
+            <meter min="0" max="100" value="78">78%</meter>
+            <p>Demand and provider response are above the early signal threshold.</p>
+          </article>
+          <article>
+            <h3>Category focus</h3>
+            <ul>
+              <li>Appliance repair</li>
+              <li>Plumbing</li>
+              <li>Computer repair</li>
+              <li>Electrical</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Manual workflow</h3>
+            <ol>
+              <li>Client submits request.</li>
+              <li>Operations checks completeness.</li>
+              <li>Providers receive matching request.</li>
+              <li>Client compares offers.</li>
+              <li>Ratings close the job.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="operations" data-view="operations">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Operations playbook</p>
+            <h2>Trust, verification, and dispute handling</h2>
+          </div>
+        </div>
+        <div class="ops-grid">
+          <article>
+            <h3>Provider quality levels</h3>
+            <div class="timeline">
+              <span>Listed</span>
+              <span>ID verified</span>
+              <span>Work verified</span>
+              <span>Top rated</span>
+              <span>Certified or business verified</span>
+            </div>
+          </article>
+          <article>
+            <h3>Dispute evidence</h3>
+            <ul>
+              <li>Original request details</li>
+              <li>Before and after photos</li>
+              <li>Chat messages</li>
+              <li>Offer amount and agreed scope</li>
+              <li>Ratings and complaint notes</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Not built yet</h3>
+            <p>In-app payments, GPS tracking, complex AI matching, and native mobile apps are intentionally out of the first MVP scope.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="brand" data-view="brand">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Brand mockup</p>
+            <h2>KAILA logo, icon, and usage samples</h2>
+          </div>
+        </div>
+
+        <div class="brand-board">
+          <article class="brand-panel logo-panel">
+            <img src="assets/kaila-logo.svg" alt="KAILA logo with local help tagline">
+          </article>
+          <article class="brand-panel icon-panel">
+            <img src="assets/kaila-icon.svg" alt="KAILA app icon">
+            <div>
+              <h3>App icon</h3>
+              <p>Map pin, helpful hand shape, and K letterform for local service discovery.</p>
+            </div>
+          </article>
+          <article class="brand-panel">
+            <h3>Color system</h3>
+            <div class="swatch-grid">
+              <span style="--swatch:#0B4552">KAILA Teal</span>
+              <span style="--swatch:#0F6B70">Trust Teal</span>
+              <span style="--swatch:#F2C66D">Referral Gold</span>
+              <span style="--swatch:#F7FBFA">Soft White</span>
+            </div>
+          </article>
+          <article class="brand-panel sample-card">
+            <div class="sample-header">
+              <img src="assets/kaila-icon.svg" alt="">
+              <strong>Provider verified</strong>
+            </div>
+            <p>Ramon A. has passed identity checks and completed 38 appliance repair jobs.</p>
+            <button type="button">Compare offer</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
