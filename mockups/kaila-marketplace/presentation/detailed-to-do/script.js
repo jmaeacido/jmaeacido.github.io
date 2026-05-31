@@ -1,8 +1,6 @@
 function readSlideData() {
   const raw = document.getElementById("slide-data").textContent.trim();
-  const textarea = document.createElement("textarea");
-  textarea.innerHTML = raw;
-  return JSON.parse(textarea.value);
+  return JSON.parse(raw);
 }
 
 const slides = readSlideData();
@@ -27,7 +25,7 @@ async function sha256(value) {
 }
 
 function unlockDeck() {
-  sessionStorage.setItem("kailaDeckUnlocked", "true");
+  sessionStorage.setItem("kailaDetailedToDoUnlocked", "true");
   document.body.classList.remove("locked");
   gate.hidden = true;
   renderSlide();
@@ -43,6 +41,10 @@ accessForm?.addEventListener("submit", async (event) => {
   accessError.hidden = false;
   accessPassword.select();
 });
+
+if (sessionStorage.getItem("kailaDetailedToDoUnlocked") === "true") {
+  unlockDeck();
+}
 
 function renderSlide() {
   const slide = slides[current];
@@ -82,6 +84,3 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight" || event.key === "PageDown") move(1);
   if (event.key === "ArrowLeft" || event.key === "PageUp") move(-1);
 });
-if (sessionStorage.getItem("kailaDeckUnlocked") === "true") {
-  unlockDeck();
-}
