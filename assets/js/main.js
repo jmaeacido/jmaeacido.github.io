@@ -170,6 +170,30 @@ const projectDetails = {
       "Selected portfolio-safe examples that demonstrate documentation value while keeping operational details and client-sensitive information private."
     ],
     screenshots: documentationScreenshots
+  },
+  "Resumo Resume Intelligence Dashboard": {
+    intro:
+      "A local resume scoring platform for ATS readiness, resume completeness, job-description matching, keyword gaps, report storage, and downloadable feedback reports.",
+    preview: {
+      src: "mockups/resumo/",
+      title: "Resumo Resume Intelligence Dashboard live preview",
+      action: "View Project",
+      badge: "AI resume tool",
+      heading: "Resumo Resume Intelligence Dashboard",
+      stack: "PHP &bull; MySQL &bull; JavaScript &bull; AdminLTE &bull; Resume Analysis"
+    }
+  },
+  "Sarah Jane Galido VA Portfolio": {
+    intro:
+      "A responsive virtual assistant and social media manager portfolio with service sections, tools, certificates, work samples, contact paths, and theme support.",
+    preview: {
+      src: "mockups/sjpgalido-va-portfolio/",
+      title: "Sarah Jane Galido VA Portfolio live preview",
+      action: "View Project",
+      badge: "Client portfolio site",
+      heading: "Sarah Jane Galido VA Portfolio",
+      stack: "HTML &bull; CSS &bull; JavaScript &bull; Responsive Portfolio &bull; Client Site"
+    }
   }
 };
 
@@ -185,10 +209,31 @@ function renderProjectDetails(title) {
     return;
   }
 
+  if (details.preview) {
+    activeCarouselController = null;
+    modalContent.innerHTML = `
+      <article class="project-live-showcase">
+        <div class="project-live-copy">
+          <span class="feature-badge">${details.preview.badge}</span>
+          <h3>${details.preview.heading}</h3>
+          <p>${details.intro}</p>
+          <div class="project-stack">${details.preview.stack}</div>
+          <div class="project-preview-actions">
+            <a class="btn btn-primary" href="${details.preview.src}" target="_blank" rel="noopener">${details.preview.action}</a>
+          </div>
+        </div>
+        <div class="project-detail-preview" aria-label="${details.preview.title}">
+          <iframe src="${details.preview.src}" title="${details.preview.title}" loading="lazy"></iframe>
+        </div>
+      </article>
+    `;
+    return;
+  }
+
   const highlights = details.highlights
     .map((item) => `<li>${item}</li>`)
     .join("");
-  const screenshots = details.screenshots
+  const screenshots = (details.screenshots || [])
     .map(
       ([caption, src], index) => `
         <button class="screenshot-card" type="button" data-carousel-index="${index}">
@@ -198,10 +243,8 @@ function renderProjectDetails(title) {
       `
     )
     .join("");
-
-  modalContent.innerHTML = `
-    <p class="modal-lead">${details.intro}</p>
-    <ul class="project-detail-list">${highlights}</ul>
+  const gallery = screenshots
+    ? `
     <div class="screenshot-gallery" aria-label="Sanitized ${title} screenshots">
       ${screenshots}
     </div>
@@ -218,9 +261,19 @@ function renderProjectDetails(title) {
         <button class="carousel-btn" type="button" data-carousel-next aria-label="Show next screenshot">&gt;</button>
       </div>
     </div>
+  `
+    : "";
+
+  modalContent.innerHTML = `
+    <p class="modal-lead">${details.intro}</p>
+    <ul class="project-detail-list">${highlights}</ul>
+    ${gallery}
   `;
 
-  setupScreenshotCarousel(details.screenshots, title);
+  activeCarouselController = null;
+  if (details.screenshots?.length) {
+    setupScreenshotCarousel(details.screenshots, title);
+  }
 }
 
 function setupScreenshotCarousel(screenshots, title) {

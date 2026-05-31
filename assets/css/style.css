@@ -603,8 +603,26 @@ h3 {
   background: linear-gradient(135deg, #b36b21, #d98f34);
 }
 
+.placeholder-resumo {
+  background: linear-gradient(135deg, #344054, #00a6a6);
+}
+
+.placeholder-portfolio {
+  background: linear-gradient(135deg, #7b3f61, #2f7f8f);
+}
+
 .project-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 1.2rem;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
 }
 
 .mockup-showcase {
@@ -925,6 +943,47 @@ h3 {
   color: var(--primary);
 }
 
+.project-live-showcase {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(1rem, 3vw, 1.6rem);
+  align-items: stretch;
+}
+
+.project-live-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.project-live-copy p {
+  color: var(--muted);
+}
+
+.project-detail-preview {
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #070b16;
+  box-shadow: var(--shadow-soft);
+}
+
+.project-detail-preview iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border: 0;
+}
+
+.project-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .screenshot-carousel {
   display: grid;
   gap: 0.75rem;
@@ -1107,12 +1166,15 @@ h3 {
   .hero-grid,
   .split-section,
   .mockup-showcase,
+  .project-live-showcase,
   .contact-grid {
     grid-template-columns: 1fr;
   }
 
   .mockup-preview,
-  .mockup-preview iframe {
+  .mockup-preview iframe,
+  .project-detail-preview,
+  .project-detail-preview iframe {
     min-height: 520px;
   }
 
@@ -1163,7 +1225,9 @@ h3 {
   }
 
   .mockup-preview,
-  .mockup-preview iframe {
+  .mockup-preview iframe,
+  .project-detail-preview,
+  .project-detail-preview iframe {
     min-height: 460px;
   }
 
