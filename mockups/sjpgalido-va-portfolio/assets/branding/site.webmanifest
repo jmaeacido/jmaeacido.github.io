@@ -1,0 +1,22 @@
+{
+  "name": "Sarah Jane Galido",
+  "short_name": "SJPG",
+  "description": "Portfolio of Sarah Jane Galido, Virtual Assistant and Social Media Manager.",
+  "start_url": "../../",
+  "scope": "../../",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#A67C8A",
+  "icons": [
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
