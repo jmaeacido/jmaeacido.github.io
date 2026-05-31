@@ -603,4 +603,13 @@ meter {
   .topbar-actions {
     justify-content: center;
   }
+
+  .request-list {
+    order: 2;
+  }
+
+  .detail-panel {
+    min-height: 0;
+    order: 1;
+  }
 }

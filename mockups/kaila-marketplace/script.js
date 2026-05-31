@@ -81,6 +81,10 @@ const densityToggle = document.querySelector("[data-density-toggle]");
 let activeRequest = requests[0].id;
 let activeFilter = "all";
 
+function shouldFocusRequestDetail() {
+  return window.matchMedia("(max-width: 640px)").matches;
+}
+
 function showView(name) {
   views.forEach((view) => view.classList.toggle("active", view.dataset.view === name));
   viewLinks.forEach((link) => link.classList.toggle("active", link.dataset.viewLink === name));
@@ -112,6 +116,9 @@ function renderRequests() {
       activeRequest = button.dataset.requestId;
       renderRequests();
       renderRequestDetail();
+      if (shouldFocusRequestDetail()) {
+        requestDetail.scrollIntoView({ block: "start" });
+      }
     });
   });
 }
