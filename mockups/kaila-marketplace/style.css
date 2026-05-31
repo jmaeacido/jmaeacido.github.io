@@ -390,6 +390,37 @@ a {
   font-weight: 800;
 }
 
+.presentation-panel {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.presentation-panel article,
+.presentation-panel iframe {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.presentation-panel article {
+  padding: 1rem;
+}
+
+.presentation-panel iframe {
+  width: 100%;
+  min-height: 520px;
+}
+
+.presentation-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
 .request-card {
   text-align: left;
   width: 100%;
@@ -558,6 +589,7 @@ meter {
   .scorecard,
   .ops-grid,
   .brand-board,
+  .presentation-panel,
   .insight-strip {
     grid-template-columns: 1fr 1fr;
   }
@@ -580,6 +612,7 @@ meter {
   .scorecard,
   .ops-grid,
   .brand-board,
+  .presentation-panel,
   .insight-strip {
     grid-template-columns: 1fr;
   }
