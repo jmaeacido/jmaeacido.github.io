@@ -125,7 +125,7 @@ const projectDetails = {
     intro:
       "A responsive Java Lava website concept covering brand storytelling, product exploration, shop flow, locator, contact, merchandise admin screens, and policy pages.",
     preview: {
-      src: "projects/java-lava/",
+      src: "projects/java-lava/site/concept-a/",
       title: "Java Lava Website Concept live preview",
       action: "Open Java Lava",
       badge: "Live website concept",
