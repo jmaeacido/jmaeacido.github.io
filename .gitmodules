@@ -1,0 +1,3 @@
+[submodule "projects/java-lava"]
+	path = projects/java-lava
+	url = https://github.com/jmaeacido/java-lava.git
