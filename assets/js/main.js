@@ -121,6 +121,18 @@ const documentationScreenshots = [
 ];
 
 const projectDetails = {
+  "Java Lava Website Concept": {
+    intro:
+      "A responsive Java Lava website concept covering brand storytelling, product exploration, shop flow, locator, contact, merchandise admin screens, and policy pages.",
+    preview: {
+      src: "projects/java-lava/",
+      title: "Java Lava Website Concept live preview",
+      action: "Open Java Lava",
+      badge: "Live website concept",
+      heading: "Java Lava Website Concept",
+      stack: "HTML &bull; CSS &bull; JavaScript &bull; Ecommerce UI &bull; Product Site"
+    }
+  },
   "KODUS Web System": {
     intro:
       "Sanitized feature captures from KODUS, showing the administrative workflows, tracking modules, reporting views, utilities, and system settings without exposing private records.",

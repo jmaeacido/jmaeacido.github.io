@@ -611,6 +611,10 @@ h3 {
   background: linear-gradient(135deg, #7b3f61, #2f7f8f);
 }
 
+.placeholder-java-lava {
+  background: linear-gradient(135deg, #5a1f12, #c76c31 55%, #f2b35f);
+}
+
 .project-body {
   display: flex;
   flex-direction: column;
