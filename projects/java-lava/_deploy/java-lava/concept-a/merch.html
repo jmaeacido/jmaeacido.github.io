@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Merch - Java Lava</title>
+<meta name="description" content="Shop Java Lava apparel, hoodies, crews, tanks, and branded essentials." />
+<link rel="icon" href="../assets/product-6cafc4.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/site.css" />
+<link rel="stylesheet" href="css/home.css" />
+<style>
+html{scroll-behavior:auto;scrollbar-width:auto;-ms-overflow-style:auto}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:12px;height:12px;display:block}
+html::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb{background:rgba(201,162,75,.55);border-radius:10px}
+html::-webkit-scrollbar-track,body::-webkit-scrollbar-track{background:#050505}
+.merch-scene-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#050505}
+.merch-scene-bg .layer{position:absolute;inset:0;will-change:transform}
+.merch-scene-bg .bg{inset:-12%;background:url('../assets/img-58314d.webp') center 42%/cover no-repeat}
+.merch-scene-bg .glow{background:radial-gradient(58% 48% at 50% 40%,rgba(226,87,30,.4),transparent 62%);mix-blend-mode:screen;animation:heatPulse 7s ease-in-out infinite}
+.merch-scene-bg .grad-top{background:linear-gradient(180deg,rgba(11,10,12,.78),rgba(11,10,12,.34) 34%,rgba(11,10,12,.92) 72%,#050505)}
+.merch-scene-bg .grad-side{background:radial-gradient(120% 80% at 50% 28%,transparent 32%,rgba(11,10,12,.68))}
+.merch-scene-bg .vignette{box-shadow:inset 0 0 240px 70px rgba(0,0,0,.7)}
+.merch-scene-bg .embers{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+footer.site,.merch-band{position:relative}
+.merch-band{z-index:1;background:linear-gradient(180deg,rgba(5,5,5,.28),rgba(5,5,5,.68) 42%,#050505 88%);padding:132px 40px 110px;min-height:100vh}
+.merch-grid{max-width:1114px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:34px 29px}
+.merch-card{overflow:hidden;border-radius:8px;background:#151515;border:1px solid rgba(255,255,255,.04);padding:30px 15px 0;transition:transform .28s,border-color .28s,box-shadow .28s}
+.merch-card:hover{transform:translateY(-6px);border-color:rgba(201,162,75,.38);box-shadow:0 18px 48px rgba(0,0,0,.35)}
+.merch-link{display:block;height:100%}
+.merch-card .photo{height:280px;background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.merch-card img{width:100%;height:100%;object-fit:contain;object-position:center}
+.merch-card .info{padding:16px 18px 18px}
+.merch-card h2{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:700;line-height:1.2;color:#fff;margin-bottom:8px}
+.merch-card .price{display:block;color:#ffd119;font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;line-height:1}
+.merch-card .price[hidden],.product-copy .price[hidden]{display:none}
+.merch-note{max-width:1114px;margin:0 auto 34px;display:flex;align-items:end;justify-content:space-between;gap:28px}
+.merch-crumb{display:block;margin-bottom:8px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,235,221,.62);font-weight:600}
+.merch-eyebrow{display:block;letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:600;margin-bottom:10px}
+.merch-note h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:500;line-height:1}
+.merch-note p{max-width:430px;color:rgba(244,235,221,.65);font-weight:300;line-height:1.65}
+.product-detail{max-width:1114px;margin:0 auto;display:none;grid-template-columns:minmax(0,1fr) minmax(360px,520px);gap:58px;align-items:start;scroll-margin-top:92px}
+.product-detail.open{display:grid}
+.back-link{display:inline-flex;margin:0 0 28px;color:var(--gold-lt);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.product-media-main{border-radius:8px;overflow:hidden;background:transparent;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,162,75,.22);box-shadow:0 18px 46px rgba(0,0,0,.22)}
+.product-media-main img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+.product-thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:18px;margin-top:20px;padding:18px;border:1px solid rgba(201,162,75,.26);border-radius:8px;background:rgba(5,5,5,.72)}
+.product-thumb{aspect-ratio:1/1;border:0;border-radius:8px;background:transparent;overflow:hidden;cursor:pointer;padding:0;opacity:.74;transition:opacity .24s,transform .24s,box-shadow .24s}
+.product-thumb:hover,.product-thumb.active{opacity:1;transform:translateY(-2px);box-shadow:0 0 0 2px var(--gold)}
+.product-thumb img{width:100%;height:100%;object-fit:contain;object-position:center}
+.product-copy{margin-top:45px}
+.product-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.6vw,4rem);font-weight:600;line-height:1.05;margin-bottom:22px}
+.product-copy .price{display:block;color:#ffd119;font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,4.2rem);font-weight:600;line-height:1;margin-bottom:30px}
+.product-copy p{color:rgba(244,235,221,.86);font-size:1.02rem;line-height:1.5;margin-bottom:20px}
+.purchase-row{display:flex;gap:14px;align-items:end;margin-top:26px;flex-wrap:wrap}
+.option-box{display:grid;gap:8px;width:126px}
+.option-box label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.option-box select{width:100%;height:50px;border:1px solid rgba(201,162,75,.34);border-radius:40px;background:rgba(11,10,12,.32) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f4ebdd' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 18px center/14px 14px no-repeat;color:var(--cream);font:700 .92rem/1 'Montserrat',sans-serif;padding:0 44px 0 22px;appearance:none;-webkit-appearance:none;-moz-appearance:none}
+.qty-box{display:grid;grid-template-columns:44px 40px 44px;align-items:center;height:50px;width:148px;border:1px solid rgba(201,162,75,.34);border-radius:40px;background:rgba(11,10,12,.32);color:var(--cream);overflow:hidden}
+.qty-box label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.qty-box input{width:100%;border:0;background:transparent;color:var(--cream);font:700 1rem/1 'Montserrat',sans-serif;text-align:center;appearance:textfield;-moz-appearance:textfield}
+.qty-box input::-webkit-outer-spin-button,.qty-box input::-webkit-inner-spin-button{appearance:none;margin:0}
+.qty-box button{width:44px;height:50px;border:0;background:transparent;font-size:1rem;font-weight:700;line-height:1;cursor:pointer;color:var(--cream)}
+.qty-box button:hover{color:var(--gold-lt)}
+.add-cart{min-width:320px;justify-content:center;border-radius:999px;font-size:1.25rem;letter-spacing:.04em}
+.soon-modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,5,.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
+.soon-modal.active{opacity:1;pointer-events:auto}
+.soon-dialog{position:relative;width:min(420px,100%);border:1px solid rgba(201,162,75,.36);border-radius:8px;background:linear-gradient(180deg,rgba(26,18,11,.98),rgba(11,10,12,.98));box-shadow:0 24px 70px rgba(0,0,0,.55);padding:34px 30px 30px;text-align:center}
+.soon-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:1px solid rgba(201,162,75,.28);border-radius:50%;background:transparent;color:var(--cream);cursor:pointer;font-size:1.2rem;line-height:1}
+.soon-close:hover{color:var(--gold-lt);border-color:var(--gold)}
+.soon-kicker{display:block;margin-bottom:9px;color:var(--gold);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.soon-dialog h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,8vw,3.1rem);font-weight:600;line-height:1;margin-bottom:14px}
+.soon-dialog p{color:rgba(244,235,221,.76);font-size:.94rem;line-height:1.65}
+.soon-selection{margin:18px 0 24px;color:var(--gold-lt);font-size:.76rem;letter-spacing:.13em;text-transform:uppercase}
+.notify-form{display:grid;gap:12px;margin-top:22px}
+.notify-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.notify-form input{width:100%;height:50px;border:1px solid rgba(201,162,75,.34);border-radius:999px;background:rgba(5,5,5,.34);color:var(--cream);font:600 .9rem/1 'Montserrat',sans-serif;padding:0 18px;text-align:center}
+.notify-form input::placeholder{color:rgba(244,235,221,.48)}
+.notify-form input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.16)}
+.notify-status{min-height:20px;color:var(--gold-lt);font-size:.78rem;line-height:1.45}
+.soon-dialog .btn{justify-content:center}
+body.show-product .merch-listing{display:none}
+@media(max-width:1100px){.merch-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){
+  .merch-band{padding:104px 22px 80px}
+  .merch-note{display:block}
+  .merch-note p{margin-top:14px}
+  .merch-grid{grid-template-columns:repeat(2,1fr);gap:22px}
+  .merch-card .photo{height:220px}
+  .product-detail{grid-template-columns:1fr;gap:34px}
+  .product-copy{margin-top:0}
+  .product-thumbs{gap:12px;padding:12px}
+  .add-cart{min-width:0;width:100%}
+  .option-box{width:100%}
+}
+@media(max-width:520px){.merch-grid{grid-template-columns:1fr}.merch-card .photo{height:300px}}
+</style>
+</head>
+<body>
+<nav class="site">
+  <a class="brand" href="index.html" aria-label="Java Lava home"><img src="../assets/product-6cafc4.png" alt="Java Lava" /></a>
+  <div class="links"><a href="story.html">Our Story</a><a href="shop.html">Shop</a><a href="merch.html" class="active">Merch</a><a href="locator.html">Store Locations</a><a href="contact.html">Contact</a></div>
+  <a class="btn" href="shop.html">Get Inspired</a>
+  <button class="menu-btn" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+</nav>
+<div class="drawer" id="drawer"><a href="story.html">Our Story</a><a href="shop.html">Shop</a><a href="merch.html">Merch</a><a href="locator.html">Store Locations</a><a href="contact.html">Contact</a></div>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<div class="merch-scene-bg" aria-hidden="true">
+  <div class="layer bg" data-parallax></div>
+  <div class="layer glow"></div>
+  <div class="layer grad-side"></div>
+  <div class="layer grad-top"></div>
+  <div class="layer vignette"></div>
+  <div class="embers" id="embers" aria-hidden="true"></div>
+</div>
+
+<main class="merch-band">
+  <section class="merch-listing" aria-label="Java Lava merch products">
+    <div class="merch-note">
+      <div>
+        <span class="merch-crumb"><a href="index.html">Home</a> / Merch</span>
+        <span class="merch-eyebrow">Wear the flow</span>
+        <h2>Java Lava Merch</h2>
+      </div>
+      <p>Premium layers and everyday pieces stamped with the Java Lava mark. Soft staples in roast, ash, cream, midnight, and volcanic green.</p>
+    </div>
+    <div class="merch-grid"></div>
+  </section>
+
+  <section class="product-detail" id="product-detail" aria-label="Full merch view">
+    <div>
+      <a class="back-link" href="merch.html">Back to merch</a>
+      <div class="product-media-main" id="product-media-main"><img id="product-main-image" src="../assets/merch/Java Lava Café Noir Signature Blouse.png" alt="Java Lava Cafe Noir Signature Blouse" /></div>
+      <div class="product-thumbs" id="product-thumbs" aria-label="Product image angles"></div>
+    </div>
+    <div class="product-copy">
+      <h2 id="product-title">Java Lava Cafe Noir Signature Blouse</h2>
+      <span class="price" id="product-price">$59.63</span>
+      <div id="product-description">
+        <p>A polished button-front layer with a dark cafe finish and Java Lava presence.</p>
+        <p>Made for tasting nights, brand events, and easy off-duty styling when you want the merch to feel elevated.</p>
+        <p>Join the waitlist and we will notify you when sizing and availability are confirmed.</p>
+      </div>
+      <div class="purchase-row">
+        <div class="option-box">
+          <label for="size-select">Size</label>
+          <select id="size-select">
+            <option>XS</option>
+            <option>S</option>
+            <option selected>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>2XL</option>
+          </select>
+        </div>
+        <div class="qty-box">
+          <label for="qty-count">QTY</label>
+          <button type="button" id="qty-decrease" aria-label="Decrease quantity">-</button>
+          <input id="qty-count" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" />
+          <button type="button" id="qty-increase" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn add-cart" id="add-cart" type="button">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="soon-modal" id="soon-modal" role="dialog" aria-modal="true" aria-labelledby="soon-title" aria-describedby="soon-copy">
+  <div class="soon-dialog">
+    <button class="soon-close" id="soon-close" type="button" aria-label="Close available soon popup">&times;</button>
+    <span class="soon-kicker">Merch Drop</span>
+    <h2 id="soon-title">Available Soon</h2>
+    <p id="soon-copy">Java Lava merch is being prepared for launch. Check back soon for ordering.</p>
+    <div class="soon-selection" id="soon-selection">Selected item</div>
+    <form class="notify-form" id="notify-form">
+      <label for="notify-email">Email address</label>
+      <input id="notify-email" type="email" name="email" autocomplete="email" placeholder="Email address" required />
+      <button class="btn" id="notify-submit" type="submit">Notify Me</button>
+      <div class="notify-status" id="notify-status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="fgrid">
+    <div><div class="brand"><img src="../assets/product-6cafc4.png" alt="" />Java Lava</div>
+      <p>Premium coffee liqueur, born from volcanic soil. Ignite the flow.</p>
+      <div class="socials"><a href="https://www.instagram.com/drinkjavalava/" target="_blank" rel="noopener" aria-label="Instagram"><img src="../assets/social-1.png" alt="Instagram" /></a><a href="https://www.facebook.com/profile.php?id=61581727574919" target="_blank" rel="noopener" aria-label="Facebook"><img src="../assets/social-2.png" alt="Facebook" /></a><a href="https://www.tiktok.com/@drinkjavalava" target="_blank" rel="noopener" aria-label="TikTok"><img src="../assets/social-3.png" alt="TikTok" /></a></div></div>
+    <div><h5>Explore</h5><ul><li><a href="story.html">Our Story</a></li><li><a href="shop.html">Shop</a></li><li><a href="merch.html">Merch</a></li><li><a href="locator.html">Store Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h5>Support</h5><ul><li><a href="shipping-policy.html">Shipping Policy</a></li><li><a href="refund-policy.html">Refund &amp; Cancellation Policy</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="accessibility-statement.html">Accessibility Statement</a></li><li><a href="terms-conditions.html">Terms &amp; Conditions</a></li></ul></div>
+  </div>
+  <div class="legal"><span>&copy; 2026 Java Lava. Please enjoy responsibly. 21+.</span><span><a href="privacy-policy.html">Privacy</a><a href="accessibility-statement.html">Accessibility</a><a href="terms-conditions.html">Terms</a></span></div>
+</footer>
+
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script><script src="js/site.js"></script><script src="js/home.js"></script><script src="js/merch-catalog.js"></script>
+<script>
+(function(){
+  var productStorageKey = 'javaLavaMerchAdminProducts';
+  var catalogVersionKey = 'javaLavaMerchCatalogVersion';
+  var products = {};
+  (window.JavaLavaMerchCatalog || []).forEach(function(product){
+    products[product.id] = Object.assign({}, product);
+  });
+  if(localStorage.getItem(catalogVersionKey) !== window.JavaLavaMerchCatalogVersion){
+    localStorage.removeItem(productStorageKey);
+    localStorage.setItem(catalogVersionKey, window.JavaLavaMerchCatalogVersion);
+  }
+  function readJson(key, fallback){
+    try {
+      return JSON.parse(localStorage.getItem(key)) || fallback;
+    } catch (error) {
+      return fallback;
+    }
+  }
+  function productStatus(product){
+    return product.status || 'Available Soon';
+  }
+  function isPriceVisible(product){
+    return product && product.showPrice === true;
+  }
+  function isArchived(product){
+    return productStatus(product) === 'Archived';
+  }
+  function isPurchasable(product){
+    return productStatus(product) === 'Active';
+  }
+  function firstVisibleProductId(){
+    return Object.keys(products).find(function(id){return !isArchived(products[id]);}) || fallback;
+  }
+  function visibleProductId(id){
+    return products[id] && !isArchived(products[id]) ? id : firstVisibleProductId();
+  }
+  function applyProductOverrides(){
+    var saved = readJson(productStorageKey, []);
+    if(!Array.isArray(saved)) return;
+    saved.forEach(function(override){
+      if(!override || !override.id) return;
+      var base = products[override.id] || {};
+      products[override.id] = Object.assign({}, base, override);
+      if(!products[override.id].label) products[override.id].label = products[override.id].title || 'Merch product';
+    });
+  }
+  function ensureMerchCard(grid, productId){
+    var link = document.querySelector('.merch-link[data-product="'+productId+'"]');
+    if(link) return link;
+    var article = document.createElement('article');
+    var anchor = document.createElement('a');
+    var photo = document.createElement('div');
+    var image = document.createElement('img');
+    var info = document.createElement('div');
+    var heading = document.createElement('h2');
+    var price = document.createElement('span');
+    article.className = 'merch-card';
+    anchor.className = 'merch-link';
+    anchor.href = 'merch.html?product=' + encodeURIComponent(productId);
+    anchor.dataset.product = productId;
+    photo.className = 'photo';
+    info.className = 'info';
+    price.className = 'price';
+    photo.appendChild(image);
+    info.appendChild(heading);
+    info.appendChild(price);
+    anchor.appendChild(photo);
+    anchor.appendChild(info);
+    article.appendChild(anchor);
+    grid.appendChild(article);
+    return anchor;
+  }
+  function renderMerchGrid(){
+    var grid = document.querySelector('.merch-grid');
+    Object.keys(products).forEach(function(productId){
+      ensureMerchCard(grid, productId);
+    });
+    document.querySelectorAll('.merch-link').forEach(function(link){
+      var product = products[link.dataset.product];
+      if(!product) return;
+      var card = link.closest('.merch-card');
+      var titleNode = link.querySelector('.info h2');
+      var priceNode = link.querySelector('.price');
+      var imageNode = link.querySelector('img');
+      if(card) card.hidden = isArchived(product);
+      if(titleNode) titleNode.textContent = product.title;
+      if(priceNode){
+        priceNode.textContent = product.price;
+        priceNode.hidden = !isPriceVisible(product);
+      }
+      if(imageNode){
+        imageNode.src = product.image;
+        imageNode.alt = product.title;
+      }
+    });
+  }
+  applyProductOverrides();
+  renderMerchGrid();
+  var fallback = 'java-lava-cafe-noir-signature-blouse';
+  var params = new URLSearchParams(window.location.search);
+  var active = products[params.get('product')] && !isArchived(products[params.get('product')]) ? params.get('product') : null;
+  var detail = document.getElementById('product-detail');
+  var mainMedia = document.getElementById('product-media-main');
+  var mainImage = document.getElementById('product-main-image');
+  var thumbs = document.getElementById('product-thumbs');
+  var title = document.getElementById('product-title');
+  var price = document.getElementById('product-price');
+  var description = document.getElementById('product-description');
+  var size = document.getElementById('size-select');
+  var qty = document.getElementById('qty-count');
+  var qtyDecrease = document.getElementById('qty-decrease');
+  var qtyIncrease = document.getElementById('qty-increase');
+  var addCart = document.getElementById('add-cart');
+  var soonModal = document.getElementById('soon-modal');
+  var soonSelection = document.getElementById('soon-selection');
+  var soonClose = document.getElementById('soon-close');
+  var notifyForm = document.getElementById('notify-form');
+  var notifyEmail = document.getElementById('notify-email');
+  var notifySubmit = document.getElementById('notify-submit');
+  var notifyStatus = document.getElementById('notify-status');
+  var lastFocused = null;
+  var notifyStorageKey = 'javaLavaMerchNotifications';
+  var currentNotifyProduct = null;
+  function setMainImage(src, alt, index){
+    mainImage.src = src;
+    mainImage.alt = alt;
+    thumbs.querySelectorAll('.product-thumb').forEach(function(button, buttonIndex){
+      button.classList.toggle('active', buttonIndex === index);
+    });
+  }
+  function productAngles(product){
+    var seen = {};
+    return (product.angles || [product.image]).filter(function(src){
+      if(!src || seen[src]) return false;
+      seen[src] = true;
+      return true;
+    });
+  }
+  function renderGallery(product){
+    var angles = productAngles(product);
+    thumbs.innerHTML = '';
+    thumbs.hidden = angles.length <= 1;
+    angles.forEach(function(src, index){
+      var button = document.createElement('button');
+      var image = document.createElement('img');
+      button.type = 'button';
+      button.className = 'product-thumb' + (index === 0 ? ' active' : '');
+      button.setAttribute('aria-label', product.label + ' angle ' + (index + 1));
+      image.src = src;
+      image.alt = product.label + ' angle ' + (index + 1);
+      button.appendChild(image);
+      button.addEventListener('click', function(){
+        setMainImage(src, product.label + ' ' + product.title, index);
+      });
+      thumbs.appendChild(button);
+    });
+    setMainImage(angles[0], product.label + ' ' + product.title, 0);
+  }
+  function productDescription(product){
+    if(Array.isArray(product.description) && product.description.length){
+      return product.description;
+    }
+    return [
+      product.title + ' is part of the upcoming Java Lava merch drop.',
+      'Product details are being finalized, so we are collecting interest before the item opens for sale.',
+      'Join the waitlist and we will notify you when sizing and availability are confirmed.'
+    ];
+  }
+  function renderDescription(product){
+    description.innerHTML = productDescription(product).map(function(text){
+      return '<p>' + escapeHtml(text) + '</p>';
+    }).join('');
+  }
+  function renderProduct(id){
+    var nextId = visibleProductId(id);
+    var product = products[nextId] || products[fallback];
+    active = nextId;
+    document.body.classList.add('show-product');
+    detail.classList.add('open');
+    title.textContent = product.title;
+    price.textContent = product.price;
+    price.hidden = !isPriceVisible(product);
+    addCart.textContent = isPurchasable(product) ? 'Add to Cart' : 'Notify Me';
+    qty.closest('.qty-box').hidden = !isPurchasable(product);
+    qty.max = '99';
+    normalizeQty(qty.value);
+    renderDescription(product);
+    renderGallery(product);
+  }
+  function setProduct(id, push){
+    renderProduct(id);
+    if(push){
+      history.pushState({product:id}, '', 'merch.html?product=' + encodeURIComponent(id));
+    }
+  }
+  document.querySelectorAll('.merch-link').forEach(function(link){
+    link.addEventListener('click', function(event){
+      event.preventDefault();
+      setProduct(link.dataset.product, true);
+      document.getElementById('product-detail').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  document.querySelector('.back-link').addEventListener('click', function(event){
+    event.preventDefault();
+    document.body.classList.remove('show-product');
+    detail.classList.remove('open');
+    history.pushState({}, '', 'merch.html');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  function normalizeQty(value){
+    var next = parseInt(value, 10);
+    if(!Number.isFinite(next) || next < 1) next = 1;
+    if(next > 99) next = 99;
+    qty.value = next;
+    return next;
+  }
+  qtyDecrease.addEventListener('click', function(){
+    normalizeQty(Number(qty.value || 1) - 1);
+  });
+  qtyIncrease.addEventListener('click', function(){
+    normalizeQty(Number(qty.value || 1) + 1);
+  });
+  qty.addEventListener('input', function(){
+    qty.value = qty.value.replace(/[^\d]/g, '');
+  });
+  qty.addEventListener('change', function(){
+    normalizeQty(qty.value);
+  });
+  qty.addEventListener('blur', function(){
+    normalizeQty(qty.value);
+  });
+  function openSoonModal(){
+    var productId = active || fallback;
+    var product = products[productId] || products[fallback];
+    var selectedQty = isPurchasable(product) ? normalizeQty(qty.value) : 1;
+    var itemWord = selectedQty === 1 ? 'item' : 'items';
+    currentNotifyProduct = {
+      id: productId,
+      title: product.title,
+      size: size.value,
+      quantity: selectedQty,
+      price: isPriceVisible(product) ? product.price : '',
+      source: 'merch-available-soon'
+    };
+    lastFocused = document.activeElement;
+    soonSelection.textContent = product.title + ' / Size ' + size.value + (isPurchasable(product) ? ' / ' + selectedQty + ' ' + itemWord : '');
+    notifyForm.reset();
+    notifyStatus.textContent = '';
+    soonModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    notifyEmail.focus();
+  }
+  function closeSoonModal(){
+    soonModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if(lastFocused && typeof lastFocused.focus === 'function'){
+      lastFocused.focus();
+    }
+  }
+  function storedNotifications(){
+    try {
+      return JSON.parse(localStorage.getItem(notifyStorageKey)) || [];
+    } catch (error) {
+      return [];
+    }
+  }
+  function escapeHtml(value){
+    return String(value).replace(/[&<>"']/g,function(char){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char];});
+  }
+  function storeNotification(email){
+    var notifications = storedNotifications();
+    var product = currentNotifyProduct || {
+      id: active || fallback,
+      title: (products[active || fallback] || products[fallback]).title,
+      size: size.value,
+      quantity: isPurchasable(products[active || fallback] || products[fallback]) ? normalizeQty(qty.value) : 1,
+      price: isPriceVisible(products[active || fallback] || products[fallback]) ? (products[active || fallback] || products[fallback]).price : '',
+      source: 'merch-available-soon'
+    };
+    var existingIndex = notifications.findIndex(function(item){
+      return item.email === email && item.productId === product.id && item.size === product.size;
+    });
+    var entry = {
+      email: email,
+      productId: product.id,
+      productTitle: product.title,
+      size: product.size,
+      quantity: product.quantity,
+      price: product.price,
+      source: product.source || 'merch-available-soon',
+      submittedAt: new Date().toISOString()
+    };
+    if(existingIndex >= 0) notifications[existingIndex] = entry;
+    else notifications.push(entry);
+    localStorage.setItem(notifyStorageKey, JSON.stringify(notifications));
+    return entry;
+  }
+  function isLocalPreview(){
+    return location.protocol === 'file:' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  }
+  function submitNotification(email){
+    var entry = storeNotification(email);
+    if(isLocalPreview()){
+      return Promise.resolve({local:true});
+    }
+    return fetch('/api/merch-notify', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify(entry)
+    }).then(function(response){
+      if(!response.ok){
+        return response.json().catch(function(){return {};}).then(function(body){
+          throw new Error(body.error || 'Could not save signup');
+        });
+      }
+      return response.json();
+    });
+  }
+  addCart.addEventListener('click', openSoonModal);
+  soonClose.addEventListener('click', closeSoonModal);
+  notifyForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    var email = notifyEmail.value.trim().toLowerCase();
+    if(!notifyEmail.checkValidity()){
+      notifyStatus.textContent = 'Please enter a valid email address.';
+      notifyEmail.focus();
+      return;
+    }
+    notifySubmit.disabled = true;
+    notifyStatus.textContent = 'Saving your signup...';
+    submitNotification(email).then(function(result){
+      notifyForm.reset();
+      notifyStatus.textContent = result && result.local
+        ? 'Preview saved locally. Live site will save this signup to the team database.'
+        : 'Thank you for signing up. We will notify you when this item becomes available.';
+    }).catch(function(){
+      notifyStatus.textContent = 'We could not save your signup right now. Please try again.';
+      notifyEmail.focus();
+    }).finally(function(){
+      notifySubmit.disabled = false;
+    });
+  });
+  soonModal.addEventListener('click', function(event){
+    if(event.target === soonModal) closeSoonModal();
+  });
+  document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape' && soonModal.classList.contains('active')) closeSoonModal();
+  });
+  window.addEventListener('popstate', function(){
+    var id = new URLSearchParams(window.location.search).get('product');
+    if(products[id]) renderProduct(id);
+    else {
+      document.body.classList.remove('show-product');
+      detail.classList.remove('open');
+    }
+  });
+  if(active) renderProduct(active);
+})();
+</script>
+</body>
+</html>

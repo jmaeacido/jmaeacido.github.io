@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Java Lava — Redesign Concepts</title>
+<link rel="icon" href="assets/product-6cafc4.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --vol-black:#0B0A0C; --vol-coffee:#1A120B; --vol-gold:#C9A24B; --vol-gold-lt:#F4D88A;
+    --vol-lava:#E2571E; --vol-ember:#FF8A3D; --vol-cream:#F4EBDD; --vol-jungle:#2E4A2B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--vol-black);color:var(--vol-cream);font-family:'Montserrat',sans-serif;min-height:100vh;
+    background-image:radial-gradient(900px 600px at 70% -10%,rgba(226,87,30,.18),transparent 60%),
+                     radial-gradient(700px 500px at 10% 110%,rgba(201,162,75,.12),transparent 60%);}
+  .wrap{max-width:1200px;margin:0 auto;padding:48px 24px 80px}
+  header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;margin-bottom:54px}
+  header img{width:128px;height:128px;object-fit:contain;filter:drop-shadow(0 8px 30px rgba(226,87,30,.35))}
+  .kicker{letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--vol-gold);font-weight:600}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05}
+  h1 em{font-style:italic;background:linear-gradient(135deg,#F4D88A,#C9A24B 45%,#8A6A2B);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{max-width:620px;color:rgba(244,235,221,.7);font-weight:300;font-size:1.02rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+  .card{position:relative;border:1px solid rgba(201,162,75,.22);border-radius:18px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.25));text-decoration:none;color:inherit;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+  .card:hover{transform:translateY(-8px);border-color:rgba(201,162,75,.6);box-shadow:0 24px 60px rgba(0,0,0,.55)}
+  .thumb{height:190px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:transform .6s,opacity .4s}
+  .card:hover .thumb img{transform:scale(1.06);opacity:1}
+  .thumb .veil{position:absolute;inset:0}
+  .cbody{padding:22px 24px 26px}
+  .ctag{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;font-weight:600}
+  .ctitle{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;margin:6px 0 8px}
+  .cdesc{font-size:.92rem;color:rgba(244,235,221,.68);font-weight:300;line-height:1.55}
+  .go{margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;font-weight:600;color:var(--vol-gold-lt)}
+  .go svg{transition:transform .3s}.card:hover .go svg{transform:translateX(5px)}
+  footer{margin-top:64px;text-align:center;color:rgba(244,235,221,.4);font-size:.82rem;font-weight:300}
+  .a .ctag{color:var(--vol-ember)} .b .ctag{color:var(--vol-gold)} .c .ctag{color:#ff5fa2}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="assets/product-6cafc4.png" alt="Java Lava" />
+      <span class="kicker">Java Lava · Redesign Proposal</span>
+      <h1>Three ways to <em>ignite the flow</em></h1>
+      <p class="sub">Same brand, same assets — three distinct, modern, interactive directions for the new
+        Java&nbsp;Lava website. Open each, scroll through, and pick the mood that feels right. We'll then
+        build the chosen direction into the full site.</p>
+    </header>
+
+    <div class="grid">
+      <a class="card a" href="concept-a/index.html">
+        <div class="thumb"><img src="assets/img-58314d.png" alt="" />
+          <div class="veil" style="background:linear-gradient(180deg,rgba(11,10,12,.1),rgba(11,10,12,.75))"></div></div>
+        <div class="cbody">
+          <span class="ctag">Concept A</span>
+          <div class="ctitle">Volcanic Cinematic</div>
+          <p class="cdesc">Immersive and dark. Full-bleed key visual, parallax volcano, lava &amp; ember reveals
+            on scroll, molten-gold typography. Dramatic and premium.</p>
+          <span class="go">View concept <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card b" href="concept-b/index.html">
+        <div class="thumb" style="background:var(--vol-cream)"><img src="assets/bottle.png" style="object-fit:contain;padding:14px" alt="" />
+          <div class="veil" style="background:linear-gradient(180deg,transparent,rgba(26,18,11,.12))"></div></div>
+        <div class="cbody">
+          <span class="ctag">Concept B</span>
+          <div class="ctitle">Editorial Luxe</div>
+          <p class="cdesc">Refined boutique feel. Cream &amp; black, generous whitespace, large Cormorant serif,
+            subtle motion. For a fine-spirits, gallery-grade brand.</p>
+          <span class="go">View concept <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card c" href="concept-c/index.html">
+        <div class="thumb" style="background:linear-gradient(135deg,#2a0d1f,#3a1206)"><img src="assets/img-58314d.png" style="object-fit:cover;opacity:.55" alt="" />
+          <div class="veil" style="background:radial-gradient(circle at 50% 120%,rgba(255,95,162,.5),transparent 60%)"></div></div>
+        <div class="cbody">
+          <span class="ctag">Concept C</span>
+          <div class="ctitle">Bold Nightlife</div>
+          <p class="cdesc">High-energy cocktail culture. Neon lava gradients, marquee, big type, interactive
+            cocktail cards and playful micro-interactions. Social and young.</p>
+          <span class="go">View concept <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+
+    <footer>Prototype for client review · not the production build · assets © Java Lava</footer>
+  </div>
+</body>
+</html>

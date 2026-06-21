@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Store Locations - Java Lava</title>
+<meta name="description" content="Find Java Lava Coffee Liqueur at a stockist near you, or order online." />
+<link rel="icon" href="../assets/product-6cafc4.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/site.css" />
+<style>
+body{background:#000}
+.locator-hero{min-height:32vh;padding-top:125px;padding-bottom:42px}
+.locator-hero .bg{background-position:center 44%}
+.locator-hero h1{font-size:clamp(2.5rem,5.2vw,4.4rem)}
+.locator-hero p{max-width:580px}
+.locator-wrap{background:#000;position:relative}
+.locator-toolbar{position:absolute;top:24px;left:50%;z-index:5;display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:18px;width:min(calc(100% - 80px),var(--maxw));align-items:start;transform:translateX(-50%);pointer-events:none}
+.locator-toolbar>*{pointer-events:auto}
+.searchbar{display:flex;gap:10px}
+.searchbar input{min-width:0;flex:1;padding:13px 16px;border-radius:6px;border:1px solid rgba(201,162,75,.45);background:rgba(18,13,8,.92);color:var(--cream);font-family:inherit;box-shadow:0 12px 26px rgba(0,0,0,.24)}
+.searchbar input:focus{outline:none;border-color:var(--gold)}
+.locator-status{align-self:center;width:max-content;max-width:100%;color:rgba(244,235,221,.78);font-size:.84rem;line-height:1.5;padding:10px 14px;border-radius:6px;background:rgba(8,6,4,.74);box-shadow:0 12px 26px rgba(0,0,0,.2)}
+.map-layout{min-height:690px;border-top:1px solid rgba(201,162,75,.16);border-bottom:1px solid rgba(201,162,75,.16)}
+#storeMap{min-height:690px;background:#efe6cf}
+.map-error{display:none;align-items:center;justify-content:center;text-align:center;min-height:690px;padding:30px;background:#160d07;color:var(--cream)}
+.map-error.active{display:flex}
+.map-error strong{display:block;color:var(--ember);font-size:1.2rem;margin-bottom:8px}
+.gm-style .gm-style-iw-c{background:#120d08;border:1px solid rgba(244,216,138,.72);border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.5);padding:0}
+.gm-style .gm-style-iw-d{overflow:hidden!important}
+.gm-style .gm-style-iw-tc::after{background:#120d08;border-left:1px solid rgba(244,216,138,.72);border-top:1px solid rgba(244,216,138,.72)}
+.gm-style .gm-ui-hover-effect{opacity:.85!important;top:0!important;right:0!important}
+.gm-style .gm-ui-hover-effect span{background-color:#f4d88a}
+.map-tooltip{color:var(--cream);font-family:inherit;line-height:1.35;max-width:260px;padding:0 0 16px;overflow:hidden}
+.map-tooltip img{width:260px;height:118px;object-fit:cover;background:#2b210f;display:block;margin-bottom:14px}
+.map-tooltip strong{display:block;color:#fff;font-size:.92rem;font-weight:700;margin-bottom:5px}
+.map-tooltip strong,.map-tooltip span,.map-tooltip a{margin-left:18px;margin-right:18px}
+.map-tooltip span{display:block;color:rgba(244,235,221,.72);font-size:.78rem;margin-bottom:8px}
+.map-tooltip a{color:var(--gold-lt);font-size:.78rem;text-decoration:underline;text-underline-offset:2px}
+footer.site{background:#000}
+@media(max-width:980px){
+  .locator-toolbar{grid-template-columns:1fr;top:18px;width:calc(100% - 44px)}
+  .locator-status{width:100%}
+  .map-layout{min-height:auto}
+  #storeMap,.map-error{min-height:520px}
+}
+@media(max-width:640px){
+  .searchbar{flex-direction:column}
+  .searchbar .btn{justify-content:center}
+  .locator-status{display:none}
+  #storeMap,.map-error{min-height:430px}
+}
+</style>
+</head>
+<body>
+<nav class="site">
+  <a class="brand" href="index.html" aria-label="Java Lava home"><img src="../assets/product-6cafc4.png" alt="Java Lava" /></a>
+  <div class="links"><a href="story.html">Our Story</a><a href="shop.html">Shop</a><a href="merch.html">Merch</a><a href="locator.html" class="active">Store Locations</a><a href="contact.html">Contact</a></div>
+  <a class="btn" href="shop.html">Get Inspired</a>
+  <button class="menu-btn" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+</nav>
+<div class="drawer" id="drawer"><a href="story.html">Our Story</a><a href="shop.html">Shop</a><a href="merch.html">Merch</a><a href="locator.html">Store Locations</a><a href="contact.html">Contact</a></div>
+
+<main>
+  <header class="page-hero locator-hero">
+    <div class="bg" data-parallax style="background-image:url('../assets/img-58314d.webp')"></div>
+    <div class="veil"></div>
+    <div class="inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Store Locations</div>
+      <span class="kicker" data-hero>Find Java Lava</span>
+      <h1 data-hero>Store Locations</h1>
+      <p data-hero>Ready to experience the bold fusion of premium coffee and spirits? Find an authorized retailer and enjoy Java Lava whenever the moment calls for something exceptional.</p>
+    </div>
+  </header>
+
+  <section class="locator-wrap" aria-label="Store locator">
+    <div class="locator-toolbar">
+      <form class="searchbar" id="storeSearch">
+        <input id="locationInput" type="text" placeholder="Enter city or ZIP code" autocomplete="postal-code" />
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="locator-status" id="locatorStatus">Showing Java Lava retailers around Atlanta, Georgia.</div>
+    </div>
+
+    <div class="map-layout">
+      <div id="storeMap" aria-label="Interactive Google map of Java Lava retailers"></div>
+      <div class="map-error" id="mapError" role="status">
+        <div><strong>Map could not load.</strong><span>Please check the Google Maps API key, billing status, and allowed referrers.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="fgrid">
+    <div><div class="brand"><img src="../assets/product-6cafc4.png" alt="" />Java Lava</div>
+      <p>Premium coffee liqueur, born from volcanic soil. Ignite the flow.</p>
+      <div class="socials"><a href="https://www.instagram.com/drinkjavalava/" target="_blank" rel="noopener" aria-label="Instagram"><img src="../assets/social-1.png" alt="Instagram" /></a><a href="https://www.facebook.com/profile.php?id=61581727574919" target="_blank" rel="noopener" aria-label="Facebook"><img src="../assets/social-2.png" alt="Facebook" /></a><a href="https://www.tiktok.com/@drinkjavalava" target="_blank" rel="noopener" aria-label="TikTok"><img src="../assets/social-3.png" alt="TikTok" /></a></div></div>
+    <div><h5>Explore</h5><ul><li><a href="story.html">Our Story</a></li><li><a href="shop.html">Shop</a></li><li><a href="merch.html">Merch</a></li><li><a href="locator.html">Store Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h5>Support</h5><ul><li><a href="shipping-policy.html">Shipping Policy</a></li><li><a href="refund-policy.html">Refund &amp; Cancellation Policy</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="accessibility-statement.html">Accessibility Statement</a></li><li><a href="terms-conditions.html">Terms &amp; Conditions</a></li></ul></div>
+  </div>
+  <div class="legal"><span>© 2026 Java Lava. Please enjoy responsibly. 21+.</span><span><a href="privacy-policy.html">Privacy</a><a href="accessibility-statement.html">Accessibility</a><a href="terms-conditions.html">Terms</a></span></div>
+</footer>
+
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script><script src="js/site.js"></script>
+<script>
+var javaLavaStores=[
+  {name:'Aloft at the Battery',address:'950 Battery Ave SE, Atlanta, GA 30339',position:{lat:33.8897,lng:-84.4688},stock:'In stock'},
+  {name:'Highland Wine & Spirits',address:'1402 N Highland Ave NE, Atlanta, GA 30306',position:{lat:33.7937,lng:-84.3514},stock:'In stock'},
+  {name:'Peachtree Bottle Shop',address:'215 Northlake Dr, Peachtree City, GA 30269',position:{lat:33.4017,lng:-84.5837},stock:'Low stock'},
+  {name:'Conyers Beverage Depot',address:'1290 Dogwood Dr SE, Conyers, GA 30013',position:{lat:33.6412,lng:-84.0088},stock:'In stock'},
+  {name:'Senoia Spirits Market',address:'75 Main St, Senoia, GA 30276',position:{lat:33.3023,lng:-84.5538},stock:'In stock'}
+];
+var map, geocoder, bounds, infoWindow, markers=[];
+var javaLavaMapStyles=[
+  {elementType:'geometry',stylers:[{color:'#efe1c4'}]},
+  {elementType:'labels.text.fill',stylers:[{color:'#5d4630'}]},
+  {elementType:'labels.text.stroke',stylers:[{color:'#f8efd9'}]},
+  {featureType:'administrative',elementType:'geometry.stroke',stylers:[{color:'#c7ab7b'}]},
+  {featureType:'administrative.locality',elementType:'labels.text.fill',stylers:[{color:'#7a3f1d'}]},
+  {featureType:'landscape.man_made',elementType:'geometry',stylers:[{color:'#ead8b7'}]},
+  {featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#d8d6aa'}]},
+  {featureType:'poi',elementType:'geometry',stylers:[{color:'#dfcfaa'}]},
+  {featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#7d6642'}]},
+  {featureType:'poi.business',stylers:[{visibility:'off'}]},
+  {featureType:'road',elementType:'geometry',stylers:[{color:'#d2b783'}]},
+  {featureType:'road',elementType:'geometry.stroke',stylers:[{color:'#f3e7cb'}]},
+  {featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#725536'}]},
+  {featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#cda96c'}]},
+  {featureType:'road.highway',elementType:'geometry',stylers:[{color:'#bd8e48'}]},
+  {featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#ead7b4'}]},
+  {featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#4f321e'}]},
+  {featureType:'transit',elementType:'geometry',stylers:[{color:'#d0c198'}]},
+  {featureType:'transit.station',elementType:'labels.text.fill',stylers:[{color:'#80643d'}]},
+  {featureType:'water',elementType:'geometry',stylers:[{color:'#9ecbc4'}]},
+  {featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#4f7770'}]}
+];
+
+function buildJavaLavaMarkerIcon(active){
+  var width=active?46:40;
+  var height=active?58:52;
+  var fill=active?'#FF8A3D':'#E2571E';
+  var ring=active?'#F4D88A':'#C9A24B';
+  var svg=[
+    '<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'" viewBox="0 0 40 52">',
+    '<filter id="shadow" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#000" flood-opacity=".55"/></filter>',
+    '<path filter="url(#shadow)" d="M20 50S4 31.7 4 17.8C4 8.4 11.2 1 20 1s16 7.4 16 16.8C36 31.7 20 50 20 50z" fill="'+fill+'" stroke="'+ring+'" stroke-width="2.6"/>',
+    '<circle cx="20" cy="17.5" r="7.3" fill="#1A120B" stroke="#F4D88A" stroke-width="2"/>',
+    '<circle cx="20" cy="17.5" r="3.2" fill="'+ring+'"/>',
+    '</svg>'
+  ].join('');
+  return {
+    url:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),
+    scaledSize:new google.maps.Size(width,height),
+    anchor:new google.maps.Point(width/2,height-2)
+  };
+}
+
+function initStoreLocator(){
+  var mapNode=document.getElementById('storeMap');
+  geocoder=new google.maps.Geocoder();
+  bounds=new google.maps.LatLngBounds();
+  map=new google.maps.Map(mapNode,{
+    center:{lat:33.7488,lng:-84.3877},
+    zoom:8,
+    mapTypeControl:true,
+    streetViewControl:true,
+    fullscreenControl:true,
+    gestureHandling:'greedy',
+    backgroundColor:'#efe1c4',
+    styles:javaLavaMapStyles
+  });
+  infoWindow=new google.maps.InfoWindow();
+  var defaultIcon=buildJavaLavaMarkerIcon(false);
+  javaLavaStores.forEach(function(store,index){
+    var marker=new google.maps.Marker({
+      position:store.position,
+      map:map,
+      title:store.name,
+      icon:defaultIcon,
+      animation:index===0?google.maps.Animation.DROP:null
+    });
+    marker.addListener('click',function(){focusStore(index,true);});
+    markers.push(marker);
+    bounds.extend(store.position);
+  });
+  map.fitBounds(bounds,{top:120,right:240,bottom:160,left:240});
+  google.maps.event.addListenerOnce(map,'bounds_changed',function(){
+    if(map.getZoom()>8){map.setZoom(8);}
+  });
+  document.getElementById('storeSearch').addEventListener('submit',searchLocation);
+}
+
+function focusStore(index,panToMarker){
+  var store=javaLavaStores[index];
+  if(!store||!map){return;}
+  markers.forEach(function(marker,markerIndex){
+    marker.setIcon(buildJavaLavaMarkerIcon(markerIndex===index));
+    marker.setZIndex(markerIndex===index?google.maps.Marker.MAX_ZINDEX+1:undefined);
+  });
+  if(panToMarker){
+    map.panTo(store.position);
+    map.setZoom(Math.max(map.getZoom(),10));
+  }
+  var streetViewUrl='https://maps.googleapis.com/maps/api/streetview?size=520x236&location='+encodeURIComponent(store.address)+'&fov=80&heading=70&pitch=0&key=AIzaSyBtge9sJxbXb_XShw_5ePgW3hYKm6CGiBQ';
+  infoWindow.setContent([
+    '<div class="map-tooltip">',
+    '<img src="'+streetViewUrl+'" alt="'+store.name+' storefront" loading="lazy" />',
+    '<strong>'+store.name+'</strong>',
+    '<span>'+store.address+'</span>',
+    '<a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(store.address)+'">Directions</a>',
+    '</div>'
+  ].join(''));
+  infoWindow.open(map,markers[index]);
+}
+
+function searchLocation(event){
+  event.preventDefault();
+  var input=document.getElementById('locationInput');
+  var status=document.getElementById('locatorStatus');
+  var query=input.value.trim();
+  if(!query){
+    map.fitBounds(bounds,{top:120,right:240,bottom:160,left:240});
+    status.textContent='Showing Java Lava retailers around Atlanta, Georgia.';
+    return;
+  }
+  status.textContent='Searching for stores near '+query+'...';
+  geocoder.geocode({address:query},function(results,geoStatus){
+    if(geoStatus!=='OK'||!results[0]){
+      status.textContent='No matching location found. Try a city, ZIP code, or full address.';
+      return;
+    }
+    var searched=results[0].geometry.location;
+    var nearest=0;
+    var nearestDistance=Infinity;
+    javaLavaStores.forEach(function(store,index){
+      var distance=google.maps.geometry.spherical.computeDistanceBetween(searched,new google.maps.LatLng(store.position));
+      if(distance<nearestDistance){nearestDistance=distance;nearest=index;}
+    });
+    map.setCenter(searched);
+    map.setZoom(10);
+    focusStore(nearest,true);
+    status.textContent='Nearest listed retailer: '+javaLavaStores[nearest].name+'.';
+  });
+}
+
+function handleMapError(){
+  document.getElementById('storeMap').style.display='none';
+  document.getElementById('mapError').classList.add('active');
+}
+
+window.initStoreLocator=initStoreLocator;
+window.gm_authFailure=handleMapError;
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtge9sJxbXb_XShw_5ePgW3hYKm6CGiBQ&libraries=geometry&callback=initStoreLocator&loading=async" onerror="handleMapError()"></script>
+</body>
+</html>
