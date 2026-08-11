@@ -203,10 +203,8 @@ function focusStore(index,panToMarker){
     map.panTo(store.position);
     map.setZoom(Math.max(map.getZoom(),10));
   }
-  var streetViewUrl='https://maps.googleapis.com/maps/api/streetview?size=520x236&location='+encodeURIComponent(store.address)+'&fov=80&heading=70&pitch=0&key=AIzaSyBtge9sJxbXb_XShw_5ePgW3hYKm6CGiBQ';
   infoWindow.setContent([
     '<div class="map-tooltip">',
-    '<img src="'+streetViewUrl+'" alt="'+store.name+' storefront" loading="lazy" />',
     '<strong>'+store.name+'</strong>',
     '<span>'+store.address+'</span>',
     '<a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(store.address)+'">Directions</a>',
@@ -250,9 +248,23 @@ function handleMapError(){
   document.getElementById('mapError').classList.add('active');
 }
 
+function googleMapsApiKey(){
+  return (window.JavaLavaConfig && window.JavaLavaConfig.googleMapsApiKey) || '';
+}
+function loadGoogleMaps(){
+  var apiKey=googleMapsApiKey();
+  if(!apiKey){handleMapError();return;}
+  var script=document.createElement('script');
+  script.async=true;
+  script.defer=true;
+  script.onerror=handleMapError;
+  script.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(apiKey)+'&libraries=geometry&callback=initStoreLocator&loading=async';
+  document.head.appendChild(script);
+}
+
 window.initStoreLocator=initStoreLocator;
 window.gm_authFailure=handleMapError;
+loadGoogleMaps();
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtge9sJxbXb_XShw_5ePgW3hYKm6CGiBQ&libraries=geometry&callback=initStoreLocator&loading=async" onerror="handleMapError()"></script>
 </body>
 </html>

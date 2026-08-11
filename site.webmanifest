@@ -1,6 +1,11 @@
 {
-  "name": "John Mark Acido Developer VA Portfolio",
+  "name": "John Mark Acido Full-Stack Web Developer Portfolio",
   "short_name": "JMAEA",
+  "description": "Full-stack web development portfolio of John Mark Agustin E. Acido, covering frontend, PHP/MySQL backend, databases, and deployment.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en-PH",
   "theme_color": "#0d1117",
   "background_color": "#0d1117",
   "display": "standalone",
