@@ -1,6 +1,6 @@
 # John Mark Agustin E. Acido Portfolio
 
-A modern static portfolio website for **John Mark Agustin E. Acido**, positioned as a Developer VA, Technical VA, and Web Developer.
+A modern static portfolio website for **John Mark Agustin E. Acido**, positioned primarily as a Full-Stack Web Developer, with Developer VA and Technical VA support services.
 
 The site is built with plain HTML, CSS, and JavaScript. It does not require a build step or custom backend, so it can be deployed directly to GitHub Pages, Netlify, Vercel, or any static hosting provider.
 

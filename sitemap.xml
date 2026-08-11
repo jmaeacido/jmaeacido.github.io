@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://jmaeacido.github.io/</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://jmaeacido.github.io/assets/img/og-image.png</image:loc>
+      <image:title>John Mark Agustin E. Acido Full-Stack Web Developer portfolio</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://jmaeacido.github.io/projects/java-lava/site/concept-a/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jmaeacido.github.io/mockups/candle-wall-mockup/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jmaeacido.github.io/mockups/kaila-marketplace/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
