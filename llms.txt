@@ -27,7 +27,7 @@ PHP, MySQL, JavaScript, HTML, CSS, Git, Linux, Nginx, XAMPP, Laragon, PM2, Socke
 - [KAILA Marketplace Mockup](https://jmaeacido.github.io/mockups/kaila-marketplace/): marketplace product and operations UI prototype.
 - KODUS Web System: PHP/MySQL system maintenance, interface improvements, data handling, troubleshooting, and reliability work. Screenshots and details may be limited for confidentiality.
 - ZYNQ Web System: system updates, issue checking, UI cleanup, documentation, and workflow improvements. Screenshots and details may be limited for confidentiality.
-- Resumo Resume Intelligence Dashboard: local resume scoring, ATS readiness, job-description matching, keyword gaps, report storage, and downloadable feedback.
+- Resumo Resume Intelligence Dashboard (https://resumo.kaila-app.com/): resume scoring, ATS readiness, job-description matching, keyword gaps, report storage, and downloadable feedback.
 
 ## Contact and identity
 

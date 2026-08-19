@@ -15,6 +15,12 @@ const modalTitle = document.querySelector("[data-modal-title]");
 const modalContent = document.querySelector("[data-modal-content]");
 let activeCarouselController = null;
 
+const projectGrid = document.querySelector(".project-grid");
+const flagshipCards = ["KODUS Web System", "ZYNQ Web System"]
+  .map((title) => document.querySelector(`[data-project-open="${title}"]`)?.closest(".project-card"))
+  .filter(Boolean);
+flagshipCards.reverse().forEach((card) => projectGrid?.prepend(card));
+
 const kodusScreenshots = [
   ["Year Selection", "assets/img/projects/kodus/01-select-year.png"],
   ["Login Choice", "assets/img/projects/kodus/02-login-choice.png"],
@@ -187,9 +193,9 @@ const projectDetails = {
     intro:
       "A local resume scoring platform for ATS readiness, resume completeness, job-description matching, keyword gaps, report storage, and downloadable feedback reports.",
     preview: {
-      src: "mockups/resumo/",
-      title: "Resumo Resume Intelligence Dashboard live preview",
-      action: "View Project",
+      src: "https://resumo.kaila-app.com/",
+      title: "Resumo Resume Intelligence Dashboard",
+      action: "Open Resumo",
       badge: "AI resume tool",
       heading: "Resumo Resume Intelligence Dashboard",
       stack: "PHP &bull; MySQL &bull; JavaScript &bull; AdminLTE &bull; Resume Analysis"
@@ -234,9 +240,17 @@ function renderProjectDetails(title) {
             <a class="btn btn-primary" href="${details.preview.src}" target="_blank" rel="noopener">${details.preview.action}</a>
           </div>
         </div>
-        <div class="project-detail-preview" aria-label="${details.preview.title}">
-          <iframe src="${details.preview.src}" title="${details.preview.title}" loading="lazy"></iframe>
-        </div>
+        ${details.preview.externalOnly ? `
+          <div class="project-detail-preview external-project-preview" aria-label="${details.preview.title}">
+            <span class="feature-badge">Live application</span>
+            <strong>Open Resumo in a new tab to explore the production site.</strong>
+            <a class="btn btn-primary" href="${details.preview.src}" target="_blank" rel="noopener">${details.preview.action}</a>
+          </div>
+        ` : `
+          <div class="project-detail-preview" aria-label="${details.preview.title}">
+            <iframe src="${details.preview.src}" title="${details.preview.title}" loading="lazy"></iframe>
+          </div>
+        `}
       </article>
     `;
     return;
@@ -494,7 +508,7 @@ document.addEventListener("keydown", (event) => {
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const fields = [...contactForm.querySelectorAll("input, textarea")];
+  const fields = [...contactForm.querySelectorAll("input, textarea, select")];
   let isValid = true;
 
   fields.forEach((field) => {
@@ -518,21 +532,20 @@ contactForm?.addEventListener("submit", (event) => {
   const formData = new FormData(contactForm);
   const name = formData.get("name").trim();
   const email = formData.get("email").trim();
+  const projectType = formData.get("projectType").trim();
+  const timeline = formData.get("timeline").trim() || "Flexible / not specified";
   const message = formData.get("message").trim();
-  const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=94jmaea94@gmail.com&su=${subject}&body=${body}`;
-
-  const emailWindow = window.open(gmailUrl, "_blank", "noopener");
+  const subject = encodeURIComponent(`${projectType} inquiry from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject type: ${projectType}\nPreferred timeline: ${timeline}\n\nCurrent need / desired outcome:\n${message}`);
+  const mailtoUrl = `mailto:94jmaea94@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = mailtoUrl;
 
   if (formNote) {
-    formNote.innerHTML = emailWindow
-      ? 'Gmail opened in a new tab. Please review and send your message there.'
-      : `Popup blocked. <a href="${gmailUrl}" target="_blank" rel="noopener">Open the Gmail draft manually</a> or email me at <a href="mailto:94jmaea94@gmail.com">94jmaea94@gmail.com</a>.`;
+    formNote.innerHTML = `Your email app should now have a prepared draft. If it did not open, email <a href="mailto:94jmaea94@gmail.com">94jmaea94@gmail.com</a> or use the Gmail link above.`;
   }
 });
 
-contactForm?.querySelectorAll("input, textarea").forEach((field) => {
+contactForm?.querySelectorAll("input, textarea, select").forEach((field) => {
   field.addEventListener("input", () => {
     field.closest("label")?.classList.toggle("invalid", !field.checkValidity());
   });
