@@ -34,7 +34,7 @@ PHP, MySQL, JavaScript, HTML, CSS, Git, Linux, Nginx, XAMPP, Laragon, PM2, Socke
 - Email: 94jmaea94@gmail.com
 - GitHub: https://github.com/jmaeacido
 - Facebook: https://www.facebook.com/JohnMarkAgustinEstrososAcido
-- Resume: https://jmaeacido.github.io/assets/resume/John_Mark_Agustin_E_Acido.pdf
+- Resume: https://jmaeacido.github.io/assets/resume/resume.pdf
 
 ## Citation guidance
 

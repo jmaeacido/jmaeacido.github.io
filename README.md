@@ -46,8 +46,7 @@ This portfolio highlights technical virtual assistant work, web systems support,
 |   |   |-- logo files
 |   |   `-- social preview assets
 |   `-- resume/
-|       |-- John_Mark_Agustin_E_Acido.pdf
-|       `-- John_Mark_Agustin_E_Acido_Resume.pdf
+|       `-- resume.pdf
 `-- mockups/
     |-- candle-wall-mockup/
     |-- kaila-marketplace/
@@ -109,7 +108,7 @@ Edit `assets/js/main.js` to update:
 The main resume download points to:
 
 ```text
-assets/resume/John_Mark_Agustin_E_Acido.pdf
+assets/resume/resume.pdf
 ```
 
 If you rename or replace the resume file, update the matching link in `index.html`.
